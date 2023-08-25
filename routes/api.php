@@ -36,6 +36,7 @@ Route::prefix('absensiAPI')->group(function () {
     Route::match(['get','post'],'updatedinasnoimage', 'AndroCo@updatedinasnoimage')->name('updatedinasnoimage');
     Route::match(['get','post'],'updatedinasimage', 'AndroCo@updatedinasimage')->name('updatedinasimage');
     Route::match(['get','post'],'getabsenbypegawai', 'AndroCo@getabsenbypegawai')->name('getabsenbypegawai');
+    Route::match(['get','post'],'getoutlocation', 'AndroCo@getoutlocation')->name('getoutlocation');
 
 
 });

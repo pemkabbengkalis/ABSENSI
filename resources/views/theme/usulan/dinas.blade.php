@@ -59,8 +59,8 @@ $class = new Cmenu();
                   <td>{{$range[1]}}</td>
                   <td>{{$v->created_at}}</td>
                   <td>{{$status}}</td>
-                  <td><a href="{{asset('uploads/'.$v->file)}}" target="popup" 
-  onclick="window.open('{{asset('uploads/'.$v->file)}}','popup','width=600,height=600'); return false;"><span style="color:white" class="me-1 badge bg-primary">{{$v->file}}</span></a></td>
+                  <td><a href="{{asset('uploads/dinas/'.$v->file)}}" target="popup" 
+  onclick="window.open('{{asset('uploads/dinas/'.$v->file)}}','popup','width=600,height=600'); return false;"><span style="color:white" class="me-1 badge bg-primary">{{$v->file}}</span></a></td>
                   <td width="10%"><a data-toggle="modal" data-target="#view{{$v->id}}"class="btn btn-primary btn-sm white"><i class="fa fa-file"></i></a></td>
                 </tr>
                 <div id="view{{$v->id}}" class="modal fade" role="dialog">
