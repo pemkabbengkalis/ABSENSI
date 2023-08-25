@@ -129,8 +129,8 @@
                   'akhir_dinas' => $range[1],
                   'tgl_pengajuan' => date('Y-m-d H:i:s', strtotime($v->created_at)),
                   'status' => $status,
-                  'file' => '<a href="' . asset('uploads/' . $v->file) . '" target="popup" 
-                              onclick="window.open(\'' . asset('uploads/' . $v->file) . '\',\'popup\',\'width=600,height=600\'); return false;">
+                  'file' => '<a href="' . asset('uploads/dinas/' . $v->file) . '" target="popup" 
+                              onclick="window.open(\'' . asset('uploads/dinas/' . $v->file) . '\',\'popup\',\'width=600,height=600\'); return false;">
                               <span style="color:white" class="me-1 badge bg-primary">' . $v->file . '</span></a>',
                   'aksi'=>'<a data-toggle="modal"
                   data-target="#view'.$v->id.'"class="btn btn-primary btn-sm white"><i
