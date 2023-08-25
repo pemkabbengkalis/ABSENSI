@@ -574,8 +574,8 @@ function updatedinasimage(Request $request){
     $class     = new Cmenu();
     $pg        = $class->getpegawai($id);
     $file      = TblDinas::where('id',$id_dinas)->first();
-    if(file_exists(public_path('uploads/'.$file->file))){
-      unlink(public_path('uploads/'.$file->file));
+    if(file_exists(public_path('uploads/dinas'.$file->file))){
+      unlink(public_path('uploads/dinas/'.$file->file));
     }
     try {
       $file = $request->file('file');
@@ -592,7 +592,7 @@ function updatedinasimage(Request $request){
       ];
       try {
         TblDinas::where('id',$id_dinas)->update($data);
-        $file->move(public_path('uploads'), $filename);
+        $file->move(public_path('uploads/dinas'), $filename);
         return response()->json(['message' => 'File uploaded successfully']);
       } catch (\Throwable $th) {
         return response()->json(['message' => $th->getMessage()]);
