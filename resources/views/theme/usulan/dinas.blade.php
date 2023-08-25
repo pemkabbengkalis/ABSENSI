@@ -21,7 +21,6 @@ $class = new Cmenu();
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <a style="float:right;color:white" class="btn btn-primary">Tambah Data</a>
          <h4 class="card-title">Daftar Izin Dinas</h4>
          
         </div>
@@ -61,7 +60,7 @@ $class = new Cmenu();
                   <td>{{$status}}</td>
                   <td><a href="{{asset('uploads/dinas/'.$v->file)}}" target="popup" 
   onclick="window.open('{{asset('uploads/dinas/'.$v->file)}}','popup','width=600,height=600'); return false;"><span style="color:white" class="me-1 badge bg-primary">{{$v->file}}</span></a></td>
-                  <td width="10%"><a data-toggle="modal" data-target="#view{{$v->id}}"class="btn btn-primary btn-sm white"><i class="fa fa-file"></i></a></td>
+                  <td width="10%"><a style='color:white;' data-toggle="modal" data-target="#view{{$v->id}}"class="btn btn-primary btn-sm white"><i class="fa fa-file"></i></a></td>
                 </tr>
                 <div id="view{{$v->id}}" class="modal fade" role="dialog">
                   <div class="modal-dialog">
