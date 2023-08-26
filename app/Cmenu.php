@@ -1,5 +1,6 @@
 <?php
 namespace App;
+use Illuminate\Support\Facades\Storage;
 use App\menu;
 use App\aksesmenuModel;
 use App\PaketModel;
@@ -68,6 +69,22 @@ class Cmenu
       return $data;
     }
   }
+
+  function encryptWithRSA($plainText, $publicKeyPath) {
+    // Membaca kunci publik dari berkas
+    $publicKeyContents = Storage::get('encription/public_key.pem');
+    $publicKey = openssl_pkey_get_public($publicKeyContents);
+    
+    // Enkripsi string dengan kunci publik RSA
+    $encrypted = '';
+    openssl_public_encrypt($plainText, $encrypted, $publicKey);
+    
+    // Melakukan Base64 encoding pada data yang dienkripsi
+    $base64Encoded = base64_encode($encrypted);
+    
+    // Mengembalikan data yang dienkripsi dan di-Base64 encode
+    return $base64Encoded;
+}
 
   function sendNotification($deviceToken, $title, $body) {
     $serverKey = 'AAAA7WIM8rE:APA91bFBsvKrxC5__VW2MGQDQJKdNZ174Cf5Vt6sAEoUQ1v7x1bfBRjVcQY_76MXXgQsUja9Z8prugT4GzScdQ8_oN48ItSPRUQW5RRcVHqXz12iR9UZiaF9aYXzE8KaFZpse_Lvj4nY'; // Replace with your FCM server key

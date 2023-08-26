@@ -202,10 +202,11 @@ public function absenluarkantor(Request $r){
   return view('theme.absensi.luarkantor',compact('data'));
 }
 public function absenmanualsave(Request $r){
+  $class = new Cmenu();
   $publicKeyContents = Storage::get('encription/public_key.pem');
   $publicKey = openssl_pkey_get_public($publicKeyContents);
-  $data=$r->namatempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
-  if (openssl_public_encrypt($data, $encrypted, $publicKey)) {
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
+  $qrcode = $class->encryptWithRSA($data, $publicKey);
      try {
       $data =[
         'nama_tempat'=>$r->tempat,
@@ -215,20 +216,23 @@ public function absenmanualsave(Request $r){
         'longitude'=>$r->longitude,
         'radius'=>$r->radius,
         'id_user'=>Session::get('id_user'),
-        'qr_code'=>$encrypted,
+        'qr_code'=>$qrcode,
        ];
        LuarKantorModel::insert($data);
        return back()->with('success','Data berhasil disimpan');
      } catch (\Throwable $th) {
        return back()->with('danger',$th->getMessage());
      }
-  }else{
-      
-  }
+
    
 }
 
 public function absenmanualupdate(Request $r){
+  $class = new Cmenu();
+  $publicKeyContents = Storage::get('encription/public_key.pem');
+  $publicKey = openssl_pkey_get_public($publicKeyContents);
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
+  $qrcode = $class->encryptWithRSA($data, $publicKey);
   $data =[
     'nama_tempat'=>$r->tempat,
     'start'=>$r->start,
@@ -237,7 +241,7 @@ public function absenmanualupdate(Request $r){
     'longitude'=>$r->longitude,
     'radius'=>$r->radius,
     'id_user'=>Session::get('id_user'),
-    'qr_code'=>Str::uuid()->toString(),
+    'qr_code'=>$qrcode,
    ];
    try {
      LuarKantorModel::where('id_luarkantor',$r->id)->update($data);
