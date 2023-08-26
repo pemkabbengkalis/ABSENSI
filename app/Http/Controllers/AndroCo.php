@@ -306,6 +306,10 @@ public function login(Request $r){
     }
     $absen = AbsenModel::where('id_pegawai',$data->id)->where('kode_unitkerja',$data->kode_unitkerja)->orderby('time','DESC')->get();
     if(!empty($data)){
+      $update = [
+        'token_firebase'=>$r->token
+      ];
+      UserModel::where('username',$r->username)->where('password',md5($r->password))->update($update);
       return response()->json([
       'message'=>'1',
       'data'=>$data,
