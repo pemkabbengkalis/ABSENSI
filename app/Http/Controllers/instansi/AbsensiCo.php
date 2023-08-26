@@ -206,7 +206,6 @@ public function absenmanualsave(Request $r){
   $publicKey = openssl_pkey_get_public($publicKeyContents);
   $data=$r->namatempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
   if (openssl_public_encrypt($data, $encrypted, $publicKey)) {
-    $encryptedData = base64_encode($encrypted);
      try {
       $data =[
         'nama_tempat'=>$r->tempat,
@@ -216,7 +215,7 @@ public function absenmanualsave(Request $r){
         'longitude'=>$r->longitude,
         'radius'=>$r->radius,
         'id_user'=>Session::get('id_user'),
-        'qr_code'=>$encryptedData,
+        'qr_code'=>$encrypted,
        ];
        LuarKantorModel::insert($data);
        return back()->with('success','Data berhasil disimpan');
