@@ -204,19 +204,20 @@ public function absenluarkantor(Request $r){
 public function absenmanualsave(Request $r){
   $publicKeyContents = Storage::get('encription/public_key.pem');
   $publicKey = openssl_pkey_get_public($publicKeyContents);
-  $data =[
-    'nama_tempat'=>$r->tempat,
-    'start'=>$r->start,
-    'end'=>$r->end,
-    'latitude'=>$r->latitude,
-    'longitude'=>$r->longitude,
-    'radius'=>$r->radius,
-    'id_user'=>Session::get('id_user'),
-    'qr_code'=>$encryptedData,
-   ];
+  $data=$r->namatempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
   if (openssl_public_encrypt($data, $encrypted, $publicKey)) {
     $encryptedData = base64_encode($encrypted);
      try {
+      $data =[
+        'nama_tempat'=>$r->tempat,
+        'start'=>$r->start,
+        'end'=>$r->end,
+        'latitude'=>$r->latitude,
+        'longitude'=>$r->longitude,
+        'radius'=>$r->radius,
+        'id_user'=>Session::get('id_user'),
+        'qr_code'=>$encryptedData,
+       ];
        LuarKantorModel::insert($data);
        return back()->with('success','Data berhasil disimpan');
      } catch (\Throwable $th) {
