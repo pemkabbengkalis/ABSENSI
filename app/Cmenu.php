@@ -77,7 +77,7 @@ class Cmenu
         'notification' => [
             'title' => $title,
             'body' => $body,
-            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+            // 'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
             'sound' => 'default'// Add the sound parameter here
         ]
     ];
