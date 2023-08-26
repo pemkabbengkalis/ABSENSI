@@ -69,6 +69,38 @@ class Cmenu
     }
   }
 
+  function sendNotification($deviceToken, $title, $body) {
+    $serverKey = 'AAAA7WIM8rE:APA91bFBsvKrxC5__VW2MGQDQJKdNZ174Cf5Vt6sAEoUQ1v7x1bfBRjVcQY_76MXXgQsUja9Z8prugT4GzScdQ8_oN48ItSPRUQW5RRcVHqXz12iR9UZiaF9aYXzE8KaFZpse_Lvj4nY'; // Replace with your FCM server key
+
+    $data = [
+        'to' => $deviceToken,
+        'notification' => [
+            'title' => $title,
+            'body' => $body,
+            'click_action' => 'FLUTTER_NOTIFICATION_CLICK',
+            'sound' => 'default'// Add the sound parameter here
+        ]
+    ];
+
+    $headers = [
+        'Authorization: key=' . $serverKey,
+        'Content-Type: application/json'
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    return $response;
+}
+
   function getpegawaifromiduser($id){
     $data = DB::table('tbl_user')->join('tbl_pegawai','tbl_pegawai.id','tbl_user.id_pegawai')->where('id_pegawai',$id)->count();
     if($data > 0){

@@ -17,6 +17,7 @@
       }
 
       public function updateaksidinas(Request $r){
+        $class = new Cmenu();
         try {
           if($r->filled('aksi')){
             $data = [
@@ -69,6 +70,9 @@
                 AbsenModel::insert($absen);
               }
               TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda sudah dikonfirmasi BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
               return back();
             }
             else{
@@ -88,6 +92,9 @@
                 AbsenModel::where('id_pegawai',$user->id_user)->where('tglabsen',$tanggal)->delete();
               }
               TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda ditolak BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
               return back();
             }
             
@@ -108,6 +115,9 @@
               AbsenModel::where('id_pegawai',$user->id_user)->where('tglabsen',$tanggal)->delete();
             }
             TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda ditolak BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
             return back();
           }
           
