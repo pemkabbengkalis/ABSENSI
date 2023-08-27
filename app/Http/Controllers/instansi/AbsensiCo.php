@@ -203,12 +203,14 @@ public function absenluarkantor(Request $r){
 }
 public function absenmanualsave(Request $r){
   $class = new Cmenu();
+  $id = uniqid();
   $publicKeyContents = Storage::get('encription/public_key.pem');
   $publicKey = openssl_pkey_get_public($publicKeyContents);
-  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius.'|'.$id;
   $qrcode = $class->encryptWithRSA($data, $publicKey);
      try {
       $data =[
+        'id_luarkantor'=>$id,
         'nama_tempat'=>$r->tempat,
         'start'=>$r->start,
         'end'=>$r->end,
@@ -231,7 +233,7 @@ public function absenmanualupdate(Request $r){
   $class = new Cmenu();
   $publicKeyContents = Storage::get('encription/public_key.pem');
   $publicKey = openssl_pkey_get_public($publicKeyContents);
-  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius;
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius.'|'.$r->id;
   $qrcode = $class->encryptWithRSA($data, $publicKey);
   $data =[
     'nama_tempat'=>$r->tempat,
