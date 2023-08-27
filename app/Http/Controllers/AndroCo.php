@@ -816,6 +816,14 @@ public function addabsenluarkantor(Request $r){
             File::makeDirectory($path, 0777, true, true);
         }   
         file_put_contents($path.'/'.$imagename, $image_base64);
+        $class = new Cmenu();
+        $user  = UserModel::where('id_user',$r->id)->first();
+        if(!empty($user)){
+          $title = $user->nama;
+          $body  = "Absen Luar Kantor anda berhasil di upload. selanjutnya akan di cek oleh BKPP";
+          $class->sendNotification($user->token_firebase, $title, $body);
+        }
+       
         $result =[
           'message'=>'Absen Berhasil dilakukan',
           'success'=>true
@@ -872,6 +880,13 @@ public function addabsen(Request $r){
                   File::makeDirectory($path, 0777, true, true);
               }   
               file_put_contents($path.'/'.$imagename, $image_base64);
+              $class = new Cmenu();
+              $user  = UserModel::where('id_user',$r->id)->first();
+              if(!empty($user)){
+                $title = $user->nama;
+                $body  = "Absensi di kantor sudah berhasil di upload";
+                $class->sendNotification($user->token_firebase, $title, $body);
+              }
               $result =[
                 'message'=>'Absen Berhasil dilakukan',
                 'success'=>true
