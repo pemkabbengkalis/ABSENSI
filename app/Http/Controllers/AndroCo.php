@@ -775,7 +775,63 @@ function get_client_ip() {
     return $ipaddress;
 }
 
+public function addabsenluarkantor(Request $r){
+  $unitkerja  = $this->getdataid($r->id);
+  $target_dir = 'swafoto/'.$unitkerja['kode_unitkerja'];
+  $latitude  = ($r->has('latitude')) ? $r->latitude:'0';
+  $longitude = ($r->has('longitude')) ? $r->longitude:'0';
+  $ip = $this->get_client_ip();
+   if ($r->swa) {
+      $base64Image = explode(";base64,", $r->swa);
+      $explodeImage = explode("image/", $base64Image[0]);
+      $imageType = $explodeImage[1];
+      $image_base64 = base64_decode($base64Image[1]);
+      $imagename = uniqid() . '.'.$imageType;
+      $file = $target_dir.'/'.$imagename;
+      
+  }
+ 
+  $result    = array();
+  $data=[
+        'id_absen'=>uniqid(),
+        'id_pegawai'=>$r->id,
+        'status'=>$r->status,
+        'keterangan'=>'Hadir',
+        'jenis'=>$r->jenis,
+        'kode_unitkerja'=>$unitkerja['kode_unitkerja'],
+        'no_surat'=>null,
+        'latitude'=>$latitude,
+        'longitude'=>$longitude,
+        'swafoto'=>$imagename,
+        'ip'=>$ip,
+        'tglabsen'=>date('Y-m-d'),
+        'id_luarkantor'=>$r->id_luarkantor,
+        'file'=>null,
+        'masaizin'=>null,
+      ];
+      try {
+        $act  = AbsenModel::insert($data);
+        $path = public_path().'/'.$target_dir;
+        if(!File::isDirectory($path)){
+            File::makeDirectory($path, 0777, true, true);
+        }   
+        file_put_contents($path.'/'.$imagename, $image_base64);
+        $result =[
+          'message'=>'Absen Berhasil dilakukan',
+          'success'=>true
+        ];
+        print json_encode($result);
+      } catch (\Throwable $th) {
+        $result =[
+          'message'=>$th->getmessage(),
+          'success'=>false
+        ];
+        print json_encode($result);
+      }
+      
 
+      
+}
 public function addabsen(Request $r){
         $unitkerja  = $this->getdataid($r->id);
         $target_dir = 'swafoto/'.$unitkerja['kode_unitkerja'];
