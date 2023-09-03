@@ -315,7 +315,8 @@ public function login(Request $r){
       'data'=>$data,
       'kantor'=>$lokasikantor,
       'jam'=>($jam != null) ? $jam:$j=['jam'=>'--:--','batas'=>'--:--'],
-      'bisaabsen'=>$checkabsen,
+      'bisaabsen'=>'yes',
+      // 'bisaabsen'=>$checkabsen,
       'listabsen'=>$absen
     ]);
    }else{
@@ -903,7 +904,6 @@ public function addabsen(Request $r){
 
             
 }
-
 public function getdatabyId(Request $r){
    try {
     $data = UserModel::where('id_user',$r->id)->join('tbl_pegawai','tbl_pegawai.id','tbl_user.id_pegawai')->first();
@@ -931,7 +931,8 @@ public function getdatabyId(Request $r){
       'data'=>$data,
       'kantor'=>$lokasikantor,
       'jam'=>($jam != null) ? $jam:$j=['jam'=>'--:--','batas'=>'--:--'],
-      'bisaabsen'=>$checkabsen,
+      'bisaabsen'=>'yes',
+      // 'bisaabsen'=>$checkabsen,
       'listabsen'=>$absen
     ]);
    }else{
