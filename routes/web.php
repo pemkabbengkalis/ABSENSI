@@ -26,6 +26,7 @@ Route::get('/login','LoginCo@index');
 Route::match(['get','post'],'loginpost','LoginCo@post');
 
 //
+Route::get('privacy_policy','FrontendCo@privacy');
 Route::get('twakto/message','FrontendCo@twakto');
 Route::get('home','FrontendCo@index');
 Route::get('jadwal','FrontendCo@jadwal');
