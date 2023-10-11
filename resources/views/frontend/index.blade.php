@@ -256,7 +256,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                             </div>
                         </div>
                         <div class="features-content">
-                            <p class="text">Short description for the ones who look for something new. Short description for the ones who look for something new.</p>
+                            <p class="text">Fitur ini digunakan untuk melakukan Cuti Pegawai. Pegawai untuk melakukan Cuti mengupload berkas Cuti ke Aplikasi absensi</p>
                             <a class="features-btn" href="#"></a>
                         </div>
                     </div> <!-- single features -->
