@@ -30,7 +30,10 @@ class Cmenu
 
   }
 
-  // function getIdPegawai($id){
+  function checkpenempatan($idpeg){
+    $check = DB::table('tbl_penempatan')->where('no',$idpeg)->count();
+    return $check;
+  }// function getIdPegawai($id){
   //    try {
   //     $data = DB::table('')->where('')
   //    } catch (\Throwable $th) {
