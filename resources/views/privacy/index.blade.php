@@ -1,54 +1,146 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>Privacy & Policy | ABSENSIKU</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - [Your App Name]</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>Privacy Policy for ABSENSIKU</h1>
+    <h1>Privacy Policy</h1>
 
-    <p>At ABSENSIKU, accessible from absensi.bengkaliskab.go.id, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by ABSENSIKU and how we use it.</p>
-    
-    <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.</p>
-    
-    <h2>Log Files</h2>
-    
-    <p>ABSENSIKU follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information. Our Privacy Policy was created with the help of the <a href="https://www.privacypolicyonline.com/privacy-policy-generator/">Privacy Policy Generator</a>.</p>
-    
-    
-    
-    
-    <h2>Privacy Policies</h2>
-    
-    <P>You may consult this list to find the Privacy Policy for each of the advertising partners of ABSENSIKU.</p>
-    
-    <p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on ABSENSIKU, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
-    
-    <p>Note that ABSENSIKU has no access to or control over these cookies that are used by third-party advertisers.</p>
-    
-    <h2>Third Party Privacy Policies</h2>
-    
-    <p>ABSENSIKU's Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. </p>
-    
-    <p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites. What Are Cookies?</p>
-    
-    <h2>Children's Information</h2>
-    
-    <p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
-    
-    <p>ABSENSIKU does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
-    
-    <h2>Online Privacy Policy Only</h2>
-    
-    <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in ABSENSIKU. This policy is not applicable to any information collected offline or via channels other than this website.</p>
-    
-    <h2>Consent</h2>
-    
-    <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>
+    <p>Effective Date: [Insert Date]</p>
+
+    <section>
+        <h2>Information We Collect</h2>
+        <p>
+            1. <strong>Location Information:</strong> We collect location information to facilitate attendance tracking.
+            This includes both foreground and background location data.
+            Background location data is used to provide continuous attendance tracking even when the app is not actively in use.
+        </p>
+        <p>
+            2. <strong>Device Information:</strong> We may collect device-specific information, such as the device model,
+            operating system version, and unique device identifiers. This information helps us optimize app performance
+            and troubleshoot issues.
+        </p>
+        <p>
+            3. <strong>User Data:</strong> We may collect user-provided data, such as names, profile pictures, and other
+            relevant information necessary for the functioning of the app. This data is used for user identification and
+            personalization within the app.
+        </p>
+    </section>
+
+    <section>
+        <h2>How We Use the Collected Information</h2>
+        <p>
+            1. <strong>Attendance Tracking:</strong> Location information is primarily used for attendance tracking
+            purposes. This includes recording when a user arrives or leaves a specific location.
+        </p>
+        <p>
+            2. <strong>App Optimization:</strong> Device information is utilized to optimize the app's performance and
+            ensure compatibility with various devices and operating systems.
+        </p>
+        <p>
+            3. <strong>User Identification:</strong> User-provided data is used for user identification within the app,
+            facilitating a personalized and efficient user experience.
+        </p>
+    </section>
+
+    <section>
+        <h2>Permissions and Location Usage</h2>
+        <p>
+            1. <strong>Background Location Access:</strong> Our app may request and utilize background location access
+            to provide continuous attendance tracking. This feature enhances the app's functionality and ensures accurate
+            attendance records.
+        </p>
+    </section>
+
+    <section>
+        <h2>Your Choices</h2>
+        <p>
+            1. <strong>Location Permissions:</strong> Users have the option to grant or deny location permissions.
+            However, denying background location access may limit the app's ability to provide continuous attendance
+            tracking.
+        </p>
+    </section>
+
+    <section>
+        <h2>Data Security</h2>
+        <p>
+            1. <strong>Data Protection:</strong> We implement industry-standard security measures to protect user data
+            from unauthorized access, disclosure, alteration, and destruction.
+        </p>
+        <p>
+            2. <strong>Data Retention:</strong> We retain user data only for as long as necessary to fulfill the purposes
+            outlined in this Privacy Policy.
+        </p>
+    </section>
+
+    <section>
+        <h2>Updates to the Privacy Policy</h2>
+        <p>
+            1. <strong>Policy Revisions:</strong> We reserve the right to update this Privacy Policy periodically.
+            Users will be notified of any significant changes, and the revised policy will be effective upon posting.
+        </p>
+    </section>
+
+    <section>
+        <h2>Contact Information</h2>
+        <p>If you have any questions or concerns about this Privacy Policy, please contact us at [your contact email].</p>
+    </section>
+
+    <section>
+        <h2>Compliance with Google Play Policies</h2>
+        <p>
+            To comply with Google Play policies, we have taken the following actions:
+        </p>
+        <p>
+            1. <strong>Permissions Declaration Form:</strong> We have submitted or updated the Permissions Declaration Form
+            via our Play Console account, explicitly outlining our app's use of background location access.
+        </p>
+        <p>
+            2. <strong>App Compliance:</strong> We have reviewed and ensured that our app complies with the Permissions and
+            APIs that Access Sensitive Information policy and the Location Permissions policy outlined by Google Play.
+        </p>
+        <p>
+            3. <strong>Store Listing:</strong> We have verified that our app's store listing accurately reflects the app's
+            functionalities and features.
+        </p>
+        <p>
+            4. <strong>Continuous Monitoring:</strong> We commit to continuous monitoring and compliance with all relevant
+            Developer Program Policies.
+        </p>
+    </section>
+
+    <p>By using our app, you acknowledge and agree to the terms outlined in this Privacy Policy. Thank you for your trust in [Your App Name].</p>
+
+    <footer>
+        <p>[End of Privacy Policy]</p>
+    </footer>
 
 </body>
+
 </html>
-
-
-
