@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - [Your App Name]</title>
+    <title>Privacy Policy - ABSENSIKU</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +32,7 @@
 
     <h1>Privacy Policy</h1>
 
-    <p>Effective Date: [Insert Date]</p>
+    <p>Effective Date: 01 January 2024</p>
 
     <section>
         <h2>Information We Collect</h2>
@@ -109,7 +109,7 @@
 
     <section>
         <h2>Contact Information</h2>
-        <p>If you have any questions or concerns about this Privacy Policy, please contact us at [your contact email].</p>
+        <p>If you have any questions or concerns about this Privacy Policy, please contact us at bkpp@bengkaliskab.go.id.</p>
     </section>
 
     <section>
@@ -135,10 +135,10 @@
         </p>
     </section>
 
-    <p>By using our app, you acknowledge and agree to the terms outlined in this Privacy Policy. Thank you for your trust in [Your App Name].</p>
+    <p>By using our app, you acknowledge and agree to the terms outlined in this Privacy Policy. Thank you for your trust in ABSENSIKU.</p>
 
     <footer>
-        <p>[End of Privacy Policy]</p>
+        
     </footer>
 
 </body>
