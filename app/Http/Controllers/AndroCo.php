@@ -295,13 +295,11 @@ public function login(Request $r){
     if($dayTerm=='Morning'){
     $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Masuk')->first();
     $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','M')->count();
-    $checkabsen = ($jam == null) ? "no":"yes";
-    $checkabsen = ($checkabsen > 0) ? "no":"yes";
+    $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
   }else if($dayTerm=='Afternoon'){
     $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
     $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','P')->count();
-    $checkabsen = ($jam == null) ? "no":"yes";
-    $checkabsen = ($checkabsen > 0) ? "no":"yes";
+    $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
     }else{
       $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
       $checkabsen = "no";
@@ -917,13 +915,11 @@ public function getdatabyId(Request $r){
     if($dayTerm=='Morning'){
     $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Masuk')->first();
     $checkabsen = AbsenModel::where('id_pegawai',$r->id)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','M')->count();
-    $checkabsen = ($jam == null) ? "no":"yes";
-    $checkabsen = ($checkabsen > 0) ? "no":"yes";
+    $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
   }else if($dayTerm=='Afternoon'){
     $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
     $checkabsen = AbsenModel::where('id_pegawai',$r->id)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','P')->count();
-    $checkabsen = ($jam == null) ? "no":"yes";
-    $checkabsen = ($checkabsen > 0) ? "no":"yes";
+    $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
     }else{
       $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
       $checkabsen = "no";
