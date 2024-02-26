@@ -315,8 +315,8 @@ public function login(Request $r){
       'data'=>$data,
       'kantor'=>$lokasikantor,
       'jam'=>($jam != null) ? $jam:$j=['jam'=>'--:--','batas'=>'--:--'],
-      'bisaabsen'=>'yes',
-      // 'bisaabsen'=>$checkabsen,
+      //'bisaabsen'=>'yes',
+      'bisaabsen'=>$checkabsen,
       'listabsen'=>$absen
     ]);
    }else{
@@ -931,8 +931,8 @@ public function getdatabyId(Request $r){
       'data'=>$data,
       'kantor'=>$lokasikantor,
       'jam'=>($jam != null) ? $jam:$j=['jam'=>'--:--','batas'=>'--:--'],
-      'bisaabsen'=>'yes',
-      // 'bisaabsen'=>$checkabsen,
+      //'bisaabsen'=>'yes',
+      'bisaabsen'=>$checkabsen,
       'listabsen'=>$absen
     ]);
    }else{
