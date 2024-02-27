@@ -28,6 +28,7 @@ Route::prefix('absensiAPI')->group(function () {
     Route::match(['get','post'],'deletecuti/{id}', 'AndroCo@deletecuti')->name('deletecuti');
     Route::match(['get','post'],'deletedinas/{id}', 'AndroCo@deletedinas')->name('deletedinas');
     Route::match(['get','post'],'addabsen', 'AndroCo@addabsen')->name('apiaddabsen');
+    Route::match(['get','post'],'addabsenluarkantor', 'AndroCo@addabsenluarkantor')->name('apiaddabsenluarkantor');
     Route::match(['get','post'],'addcuti', 'AndroCo@addcuti')->name('apiaddcuti');
     Route::match(['get','post'],'adddinas', 'AndroCo@adddinas')->name('apiadddinas');
     Route::match(['get','post'],'getemployee', 'AndroCo@getemployee')->name('getemployee');
@@ -36,6 +37,7 @@ Route::prefix('absensiAPI')->group(function () {
     Route::match(['get','post'],'updatedinasnoimage', 'AndroCo@updatedinasnoimage')->name('updatedinasnoimage');
     Route::match(['get','post'],'updatedinasimage', 'AndroCo@updatedinasimage')->name('updatedinasimage');
     Route::match(['get','post'],'getabsenbypegawai', 'AndroCo@getabsenbypegawai')->name('getabsenbypegawai');
+    Route::match(['get','post'],'getoutlocation', 'AndroCo@getoutlocation')->name('getoutlocation');
 
 
 });

@@ -8,6 +8,7 @@ use App\Aktor;
 use App\AlurDispo;
 use App\Cmenu;
 $level = Level::all();
+$class = new Cmenu();
  ?>
 
 <main class="app-content">
@@ -65,9 +66,13 @@ $level = Level::all();
                 <div class="modal-body">
                     
                      <label>Pilih Data Pegawai</label>
-                    <select class="form-control" name="pegawai" >
+                    <select style="width:100%;height:50px" class="form-control select2" name="pegawai" >
                       @foreach($pegawai as $ip => $vp)
+                      @if($class->checkpenempatan($vp->id) > 0)
+
+                      @else
                       <option value="{{ $vp->id }}">{{ '('.$vp->nip.')'.$vp->gd.' '.$vp->nama.' '.$vp->gb }}</option>
+                      @endif
                       @endforeach
 
                     </select>

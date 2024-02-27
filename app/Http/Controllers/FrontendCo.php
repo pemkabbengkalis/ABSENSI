@@ -18,6 +18,11 @@ class FrontendCo extends Controller
 
 }
 
+
+public function privacy(){
+  return view('privacy.index');
+}
+
 public function twakto(){
   return view('twakto.index');
 }

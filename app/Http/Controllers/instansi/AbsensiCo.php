@@ -202,33 +202,39 @@ public function absenluarkantor(Request $r){
   return view('theme.absensi.luarkantor',compact('data'));
 }
 public function absenmanualsave(Request $r){
+  $class = new Cmenu();
+  $id = uniqid();
   $publicKeyContents = Storage::get('encription/public_key.pem');
   $publicKey = openssl_pkey_get_public($publicKeyContents);
-  $data =[
-    'nama_tempat'=>$r->tempat,
-    'start'=>$r->start,
-    'end'=>$r->end,
-    'latitude'=>$r->latitude,
-    'longitude'=>$r->longitude,
-    'radius'=>$r->radius,
-    'id_user'=>Session::get('id_user'),
-    'qr_code'=>$encryptedData,
-   ];
-  if (openssl_public_encrypt($data, $encrypted, $publicKey)) {
-    $encryptedData = base64_encode($encrypted);
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius.'|'.$id;
+  $qrcode = $class->encryptWithRSA($data, $publicKey);
      try {
+      $data =[
+        'id_luarkantor'=>$id,
+        'nama_tempat'=>$r->tempat,
+        'start'=>$r->start,
+        'end'=>$r->end,
+        'latitude'=>$r->latitude,
+        'longitude'=>$r->longitude,
+        'radius'=>$r->radius,
+        'id_user'=>Session::get('id_user'),
+        'qr_code'=>$qrcode,
+       ];
        LuarKantorModel::insert($data);
        return back()->with('success','Data berhasil disimpan');
      } catch (\Throwable $th) {
        return back()->with('danger',$th->getMessage());
      }
-  }else{
-      
-  }
+
    
 }
 
 public function absenmanualupdate(Request $r){
+  $class = new Cmenu();
+  $publicKeyContents = Storage::get('encription/public_key.pem');
+  $publicKey = openssl_pkey_get_public($publicKeyContents);
+  $data = 'BOY_CHIPER|'.$r->tempat.'|'.$r->start.'|'.$r->end.'|'.$r->latitude.'|'.$r->longitude.'|'.$r->radius.'|'.$r->id;
+  $qrcode = $class->encryptWithRSA($data, $publicKey);
   $data =[
     'nama_tempat'=>$r->tempat,
     'start'=>$r->start,
@@ -237,7 +243,7 @@ public function absenmanualupdate(Request $r){
     'longitude'=>$r->longitude,
     'radius'=>$r->radius,
     'id_user'=>Session::get('id_user'),
-    'qr_code'=>Str::uuid()->toString(),
+    'qr_code'=>$qrcode,
    ];
    try {
      LuarKantorModel::where('id_luarkantor',$r->id)->update($data);
@@ -335,9 +341,9 @@ public function apiabsen(Request $r){
     $absensi = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->where('tglabsen',date('Y-m-d'))->first();
     $data =[
       'no'=>$i+1,
-      'nama_pegawai'=>((empty($v->gd) OR $v->gd == '-') ? '':$v->gd).''.$v->nama.' '.$v->gb,
+      'nama_pegawai'=>((empty($v->gd) OR $v->gd == '-') ? '':$v->gd).''.$v->nama.' '.$v->gb.'<br> NIP :'.$v->nip,
       'pangkat'=>$v->pangkat_gol,
-      'waktu_absen'=>(!empty($absensi->tglabsen)) ? $absensi->tglabsen:"Belum Absen",
+      'waktu_absen'=>(!empty($absensi->tglabsen)) ? $absensi->time:"Belum Absen",
       'H'=>(!empty($absensi->status)) ? ($absensi->status=='H') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",
       'D'=>(!empty($absensi->status)) ? ($absensi->status=='D') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",
       'C'=>(!empty($absensi->status)) ? ($absensi->status=='C') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",
@@ -411,9 +417,9 @@ public function getdataabsenfromjenis(Request $r){
     $absensi = AbsenModel::where('jenis',$r->jenisabsen)->where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->where('tglabsen',$r->tanggalabsen)->first();
     $data =[
       'no'=>$i+1,
-      'nama_pegawai'=>((empty($v->gd) OR $v->gd == '-') ? '':$v->gd).''.$v->nama.' '.$v->gb,
+      'nama_pegawai'=>((empty($v->gd) OR $v->gd == '-') ? '':$v->gd).''.$v->nama.' '.$v->gb.'<br> NIP : '.$v->nip,
       'pangkat'=>$v->pangkat_gol,
-      'waktu_absen'=>(!empty($absensi->tglabsen)) ? $absensi->tglabsen:"Belum Absen",
+      'waktu_absen'=>(!empty($absensi->tglabsen)) ? $absensi->time:"Belum Absen",
       'H'=>(!empty($absensi->status)) ? ($absensi->status=='H') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",
       'D'=>(!empty($absensi->status)) ? ($absensi->status=='D') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",
       'C'=>(!empty($absensi->status)) ? ($absensi->status=='C') ? '<i style="color:green" class="fa fa-check"></i>':"-" :"-",

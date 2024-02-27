@@ -17,6 +17,7 @@
       }
 
       public function updateaksidinas(Request $r){
+        $class = new Cmenu();
         try {
           if($r->filled('aksi')){
             $data = [
@@ -69,6 +70,31 @@
                 AbsenModel::insert($absen);
               }
               TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda sudah dikonfirmasi BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
+              return back();
+            }
+            else{
+              $data = [
+                'status'=>'N'
+              ];
+              $cuti          = TblDinas::where('id',$r->id)->first();
+              $user          = UserModel::where('id_pegawai',$cuti->id_pegawai)->first();
+              $date_parts    = explode(" s/d ", $cuti->rentang_absen);
+              $tanggal_awal  = $date_parts[0];
+              $tanggal_akhir = $date_parts[1];
+              // Convert tanggal_awal and tanggal_akhir to timestamps
+              $tanggal_awal_timestamp = strtotime($tanggal_awal);
+              $tanggal_akhir_timestamp = strtotime($tanggal_akhir);
+              for ($timestamp = $tanggal_awal_timestamp; $timestamp <= $tanggal_akhir_timestamp; $timestamp += 86400) {
+                $tanggal = date('Y-m-d', $timestamp);
+                AbsenModel::where('id_pegawai',$user->id_user)->where('tglabsen',$tanggal)->delete();
+              }
+              TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda ditolak BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
               return back();
             }
             
@@ -89,6 +115,9 @@
               AbsenModel::where('id_pegawai',$user->id_user)->where('tglabsen',$tanggal)->delete();
             }
             TblDinas::where('id',$r->id)->update($data);
+              $title = $user->nama;
+              $body  = "Pengajuan Izin dinas anda ditolak BKPP";
+              $class->sendNotification($user->token_firebase, $title, $body);
             return back();
           }
           
@@ -129,8 +158,8 @@
                   'akhir_dinas' => $range[1],
                   'tgl_pengajuan' => date('Y-m-d H:i:s', strtotime($v->created_at)),
                   'status' => $status,
-                  'file' => '<a href="' . asset('uploads/' . $v->file) . '" target="popup" 
-                              onclick="window.open(\'' . asset('uploads/' . $v->file) . '\',\'popup\',\'width=600,height=600\'); return false;">
+                  'file' => '<a href="' . asset('uploads/dinas/' . $v->file) . '" target="popup" 
+                              onclick="window.open(\'' . asset('uploads/dinas/' . $v->file) . '\',\'popup\',\'width=600,height=600\'); return false;">
                               <span style="color:white" class="me-1 badge bg-primary">' . $v->file . '</span></a>',
                   'aksi'=>'<a data-toggle="modal"
                   data-target="#view'.$v->id.'"class="btn btn-primary btn-sm white"><i

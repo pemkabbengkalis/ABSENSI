@@ -283,7 +283,6 @@ google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 <input class="form-control" type="datetime-local" id="datetime" name="end" value="{{ $v->end }}">
             <i>Batas Absensi</i>
             </div>
-            
         </div>
         <label>Kordinat</label>
         <div style="display:flex;flex-direction:row;gap:2px;width:100%">

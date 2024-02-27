@@ -119,7 +119,8 @@ public function resetakun($id=null){
   try {
     $pegawai = PegawaiModel::find(base64_decode($id));
     $data = [
-      'password'=>md5($pegawai->nip)
+      'password'=>md5($pegawai->nip),
+      'username'=>$pegawai->nip
     ];
     $act = Loginmodel::where('id_pegawai',base64_decode($id))->update($data);
     return back()->with('success','Password Berhasil di reset');
