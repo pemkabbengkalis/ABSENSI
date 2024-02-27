@@ -82,7 +82,38 @@ public function cetakabsensi(Request $r){
     $pdf = PDF::loadview('theme.laporan.absensi',compact('dataabsen','instansi','date'));
 	  return $pdf->stream();
   }else if(Session::get('level')=='BKPP'){
-    print "BKPP";
+    $dataabsen    = array();
+    $ki       = substr($r->skpd,0,8);
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $start    = $r->from;
+    $end      = $r->to;
+    $implodedate = [$start, $end];
+    foreach($pg as $i => $v){
+      $H       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','H')->count();
+      $D       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','D')->count();
+      $C       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','C')->count();
+      $S       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','S')->count();
+      $A       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','A')->count();
+      $P       = AbsenModel::where('tbl_user.id_pegawai',$v->id)->join('tbl_user','tbl_user.id_user','tbl_absen.id_pegawai')->whereBetween('tglabsen', $implodedate)->where('status','P')->count();
+      $data =[
+        'no'=>$i+1,
+        'nama_pegawai'=>((empty($v->gd) OR $v->gd == '-') ? '':$v->gd).''.$v->nama.' '.$v->gb,
+        'nip'=>$v->nip,
+        'pangkat'=>$v->pangkat_gol,
+        'H'=>($H > 0 ) ? ($H/2):"-",
+        'D'=>($D > 0 ) ? ($D/2):"-",
+        'C'=>($C > 0 ) ? ($C/2):"-",
+        'S'=>($S > 0 ) ? ($C/2):"-",
+        'A'=>($A > 0 ) ? ($A/2):"-",
+        'P'=>($P > 0 ) ? ($P/2):"-",
+      ];
+      array_push($dataabsen,$data);
+    }
+    $date = $class->tgl_indos($start).' - '.$class->tgl_indos($end);
+    $instansi = $class->namainstansi($r->skpd);
+    // return view('theme.laporan.absensi',compact('dataabsen','instansi','date'));
+    $pdf = PDF::loadview('theme.laporan.absensi',compact('dataabsen','instansi','date'));
+	  return $pdf->stream();
   }else{
     print "NOTFOUND";
   }
