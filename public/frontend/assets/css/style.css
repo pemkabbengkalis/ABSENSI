@@ -3264,7 +3264,7 @@ p.form-message.success, p.form-message.error {
   position: relative;
   height: 100vh;
 }
-@media screen and (min-width:300px) {
+@media screen and (min-width:300px) and (max-width:500px) {
 
   .logo-img-landing{
       width:45px;
