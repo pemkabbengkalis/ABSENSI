@@ -3258,6 +3258,12 @@ p.form-message.success, p.form-message.error {
 .logo-img-landing{
   width:70px;
 }
+
+.carousel-item {
+  background-color: #0067f4;
+  position: relative;
+  height: 100vh;
+}
 @media screen and (min-width:300px) {
 
   .logo-img-landing{
