@@ -103,7 +103,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                         
                         <div class="navbar-btn d-none d-sm-inline-block">
                             <ul>
-                                <li><a class="solid" href="{{url('/login')}}">Login</a></li>
+                                <li><a class="solid" href="{{url('/login')}}">Login <i class="lni lni-enter"></i></a></li>
                             </ul>
                         </div>
                     </nav> <!-- navbar -->

@@ -2173,8 +2173,15 @@ p {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 10px 0;
-  z-index: 99; }
+  padding: 0px 0;
+  z-index: 99;
+}
+
+.navbar-area.sticky .navbar .navbar-btn li a.solid {
+  border-color: #ffb400;
+  background-color: #ffb400;
+  color: #fff;
+}
   .navbar-area .navbar {
     position: relative;
     padding: 0; }
@@ -3255,8 +3262,8 @@ p.form-message.success, p.form-message.error {
 /*# sourceMappingURL=style.css.map */
 
 
-.logo-img-landing{
-  width:70px;
+.logo-img-landing {
+  width: 48px;
 }
 
 .carousel-item {
