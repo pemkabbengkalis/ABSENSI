@@ -81,7 +81,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                     <nav class="navbar navbar-expand-lg">
                        
                         <a href="#">
-                            <img style="width:70px" src="{{asset('frontend')}}/assets/images/logo.png" alt="Logo">
+                            <img class="logo-img-landing" src="{{asset('frontend')}}/assets/images/logo.png" alt="Logo">
                         </a>
                         
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTwo" aria-controls="navbarTwo" aria-expanded="false" aria-label="Toggle navigation">
@@ -277,7 +277,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                         <h3 class="title">Panduan Penggunaan Aplikasi</h3>
                         <p class="text">untuk penduan penggunaan Aplikasi anda dapat melihatnya dibawah ini</p>
                         <div class="light-rounded-buttons mt-30">
-                        <iframe src="https://ppkl.menlhk.go.id/website/filebox/592/190408165734um_lhk_ditppa_file_management_2018_v01.pdf" style="width:100%;height:500px" frameborder="0"></iframe>
+                        <!-- <iframe src="https://ppkl.menlhk.go.id/website/filebox/592/190408165734um_lhk_ditppa_file_management_2018_v01.pdf" style="width:100%;height:500px" frameborder="0"></iframe> -->
                         </div>
                     </div> <!-- section title -->
                 </div>
