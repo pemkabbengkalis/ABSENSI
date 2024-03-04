@@ -142,7 +142,13 @@
       public function apiusulandinas(Request $r){
         $class       = new Cmenu();
         $array       = array();
-        $datacuti    = TblDinas::where('id_instansi',$r->skpd)->wheredate('created_at',$r->tanggal)->get();
+        if($r->tanggal != ''){
+          //$datacuti    = TblDinas::where('id_instansi',$r->skpd)->get();
+
+          $datacuti    = TblDinas::where('id_instansi',$r->skpd)->wheredate('created_at',$r->tanggal)->get();
+        }else{
+           $datacuti    = TblDinas::where('id_instansi',$r->skpd)->get();
+        }
         foreach ($datacuti as $i => $v){
        
             $pegawai = $class->getpegawaifromiduser($v->id_pegawai);
