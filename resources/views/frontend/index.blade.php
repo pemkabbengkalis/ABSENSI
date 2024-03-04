@@ -134,7 +134,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                                     <p class="text">Selamat datang di Sistem Aplikasi ABSENSI Online Kabupaten Bengkalis. Sistem ini merupakan inovasi Pemerintah kabupaten bengkalis dalam melakukan ABSENSI di seluruh SKPD Kabupaten Bengkalis</p>
                                     <ul class="slider-btn rounded-buttons">
                                         {{-- <li><a class="main-btn rounded-one" href="#">GET STARTED</a></li> --}}
-                                        <li><a class="main-btn rounded-two" href="#">DOWNLOAD</a></li>
+                                        <li><a class="main-btn rounded-two" href="https://play.google.com/store/apps/details?id=id.go.bengkaliskab.absensi&pcampaignid=web_share">DOWNLOAD</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                                     <p class="text">Dengan fitur ini untuk melakukan absensi menggunakan smartphone dan harus berada pada radius yang telah ditentukan berdasarkan kordinat kantor </p>
                                     <ul class="slider-btn rounded-buttons">
                                         {{-- <li><a class="main-btn rounded-one" href="#">GET STARTED</a></li> --}}
-                                        <li><a class="main-btn rounded-two" href="#">DOWNLOAD</a></li>
+                                        <li><a class="main-btn rounded-two" href="https://play.google.com/store/apps/details?id=id.go.bengkaliskab.absensi&pcampaignid=web_share">DOWNLOAD</a></li>
                                     </ul>
                                 </div> <!-- slider-content -->
                             </div>
@@ -178,7 +178,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                                     <p class="text">Tersedia fitur untuk pengajuan Cuti dan Izin Dinas dalam Sistem Pemerintahan</p>
                                     <ul class="slider-btn rounded-buttons">
                                         {{-- <li><a class="main-btn rounded-one" href="#">GET STARTED</a></li> --}}
-                                        <li><a class="main-btn rounded-two" href="#">DOWNLOAD</a></li>
+                                        <li><a class="main-btn rounded-two" href="https://play.google.com/store/apps/details?id=id.go.bengkaliskab.absensi&pcampaignid=web_share">DOWNLOAD</a></li>
                                     </ul>
                                 </div> <!-- slider-content -->
                             </div>
@@ -218,7 +218,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-features mt-40">
-                        <div class="features-title-icon d-flex justify-content-between">
+                        <div class="features-title-icon d-flex-landing justify-content-between">
                             <h4 class="features-title"><a href="#">Absensi</a></h4>
                             <div class="features-icon">
                                 <i class="lni lni-mobile"></i>
@@ -233,7 +233,7 @@ $datamarker = KordinatModel::where('latitude','!=','')
                 </div>
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-features mt-40">
-                        <div class="features-title-icon d-flex justify-content-between">
+                        <div class="features-title-icon d-flex-landing justify-content-between">
                             <h4 class="features-title"><a href="#">Izini Dinas</a></h4>
                             <div class="features-icon">
                                 <i class="lni lni-car"></i>
@@ -241,14 +241,14 @@ $datamarker = KordinatModel::where('latitude','!=','')
                             </div>
                         </div>
                         <div class="features-content">
-                            <p class="text">Fitur ini digunakan untuk melakukan Izin dinas Pegawai. Pegawai untuk melakukan izin dinas mengupload bukti SPT dinas sebagai ke Aplikasi absensi</p>
+                            <p class="text">Fitur ini digunakan untuk melakukan Izin dinas Pegawai. Untuk melakukan izin dinas, Pegawai mengupload bukti SPT dinas ke Aplikasi absensi</p>
                             <a class="features-btn" href="#"></a>
                         </div>
                     </div> <!-- single features -->
                 </div>
                 <div class="col-lg-4 col-md-7 col-sm-9">
                     <div class="single-features mt-40">
-                        <div class="features-title-icon d-flex justify-content-between">
+                        <div class="features-title-icon d-flex-landing justify-content-between">
                             <h4 class="features-title"><a href="#">Izin Cuti</a></h4>
                             <div class="features-icon">
                                 <i class="lni lni-calendar"></i>
@@ -736,7 +736,9 @@ $datamarker = KordinatModel::where('latitude','!=','')
       <!-- Links -->
       <h6 style="color:white" class="text-uppercase fw-bold" style="color:white;">Downlad</h6>
       <div style="margin-top:20px">
-        <img src="/public/frontend/assets/images/playstoredownload.png" alt="">
+       <a href="https://play.google.com/store/apps/details?id=id.go.bengkaliskab.absensi&pcampaignid=web_share">
+         <img class="img-playstore" src="{{asset('frontend')}}/assets/images/playstoredownload.png" alt="">
+        </a>
       </div>
     </div>
     <!-- Grid column -->

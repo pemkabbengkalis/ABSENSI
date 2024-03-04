@@ -122,9 +122,18 @@ p {
 
   .single-features {
     border-radius: 10px;
-    height: 275px;
+    height: 305px;
     padding: 40px 20px 52px;
     background-color: #fff;
+}
+
+.d-flex-landing {
+  display: -ms-flexbox!important;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 /*===== All Preloader Style =====*/
@@ -2182,9 +2191,14 @@ p {
   background-color: #ffb400;
   color: #fff;
 }
-  .navbar-area .navbar {
-    position: relative;
-    padding: 0; }
+.navbar-area .navbar {
+  position: relative;
+  padding: 6px;
+}
+
+.img-playstore {
+  max-width: 74%;
+}
     .navbar-area .navbar .navbar-toggler .toggler-icon {
       width: 30px;
       height: 2px;
@@ -3272,9 +3286,12 @@ p.form-message.success, p.form-message.error {
   height: 100vh;
 }
 @media screen and (min-width:300px) and (max-width:500px) {
+  .img-playstore {
+    max-width: 47%;
+}
 
-  .logo-img-landing{
-      width:45px;
+  .logo-img-landing {
+    width: 31px;
   }
 
   .me-5{
