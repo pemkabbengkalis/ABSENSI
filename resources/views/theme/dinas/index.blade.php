@@ -21,7 +21,7 @@ $class = new Cmenu();
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <input id="tgl" style="width:20%;float:right;margin-right:2px;" type="date" name="tgl" class="form-control" value="2023-08-01">
+          <input id="tgl" style="width:20%;float:right;margin-right:2px;" type="date" name="tgl" class="form-control" value="kosong">
             <select id="skpd" class="form-control" style="width:20%;float:right;margin-right:2px;"name="jenis">
                             @foreach ($skpd as $i => $v)
                                 <option value="{{$v->kode_unitkerja}}">{{ $v->nama_unitkerja }}</option>
