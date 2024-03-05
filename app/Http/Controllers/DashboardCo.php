@@ -10,6 +10,9 @@ use App\Gurumodel;
 use App\Cmenu;
 use App\PegawaiModel;
 use App\UsulanModel;
+use App\TblDinas;
+use App\TblCuti;
+use App\AbsenModel;
 class DashboardCo extends Controller
 {
   public function __construct()
@@ -22,16 +25,16 @@ class DashboardCo extends Controller
  public function index(){
   if(Session::get('level')=='user'){
     $pegawai = PegawaiModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->count();
-    $D = UsulanModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('jenis_cuti','D')->count();
-    $S = UsulanModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('jenis_cuti','S')->count();
-    $L = UsulanModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('jenis_cuti','L')->count();
-    return view($this->index,compact('pegawai','S','D','L'));
+    $D = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','D')->count();
+    $C = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','C')->count();
+    $S = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','S')->count();
+    return view($this->index,compact('pegawai','C','D','L'));
   }else{
     $pegawai = PegawaiModel::count();
-    $D = UsulanModel::where('jenis_cuti','D')->count();
-    $S = UsulanModel::where('jenis_cuti','S')->count();
-    $L = UsulanModel::where('jenis_cuti','L')->count();
-    return view($this->index,compact('pegawai','S','D','L'));
+    $D = AbsenModel::where('status','D')->count();
+    $C = AbsenModel::where('status','C')->count();
+    $S = AbsenModel::where('status','S')->count();
+    return view($this->index,compact('pegawai','C','D','S'));
   }
    
  }

@@ -57,21 +57,22 @@ if(Session::get('level')=='user'){
       </div>
     </div>
     <div class="col-md-6 col-lg-3">
-      <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+      <div class="widget-small danger coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
         <div class="info">
-          <h4>Izin Sakit</h4>
-          <p><b>{{ $S }}</b></p>
+          <h4>Izin Cuti</h4>
+          <p><b>{{ $C }}</b></p>
         </div>
       </div>
     </div>
     <div class="col-md-6 col-lg-3">
-      <div class="widget-small danger coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+      <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
         <div class="info">
-          <h4>Izin Cuti</h4>
-          <p><b>{{ $L }}</b></p>
+          <h4>Izin Sakit</h4>
+          <p><b>{{$S}}</b></p>
         </div>
       </div>
     </div>
+    
   </div>
   <div class="row">
 
