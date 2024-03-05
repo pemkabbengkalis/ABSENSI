@@ -42,7 +42,7 @@ if(Session::get('level')=='user'){
     </ul>
   </div>
 <div class="row">
-<div class="col-4">
+<div class="col-md-4 col-sm-12 col-lg-4">
   <div class="card">
     <div class="card-body">
       <button style="float:right;"class="btn btn-primary" data-toggle="modal" data-target="#updatepass"><i class="fa fa-lock"></i> Update Password</button>
@@ -138,7 +138,7 @@ if(Session::get('level')=='user'){
     </div>
   </div>
 </div>
-<div class="col-8">
+<div class="col-md-8 col-sm-12 col-lg-8">
   <div class="card">
     <div class="card-body">
       <div class="tile">
