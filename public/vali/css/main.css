@@ -16064,7 +16064,7 @@ be a descendant of the grid when it is being dragged.
 .app-title {
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;

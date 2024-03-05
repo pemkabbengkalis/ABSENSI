@@ -59,7 +59,7 @@ use App\AbsenModel;
   
   @elseif($data_a->status!=='C' || $data_a->status!=='P' || $data_a->status!=='D')
   <div class="row">
-  <div class="col-7">
+  <div class="col-md-7 col-lg-7 col-sm-12">
     <div class="card">
       <div class="card-header">
        
@@ -74,7 +74,7 @@ use App\AbsenModel;
       <div class="card-body">
         <div class="container">
         <div class="row">
-          <div  class="col-md-6">
+          <div  class="col-md-6 col-sm-12">
             <label>Tgl Absen</label>
             <input type="text" class="form-control" disabled value="{{$data_a->time}}">
             <label>Status</label>
@@ -83,7 +83,7 @@ use App\AbsenModel;
             <input type="text" class="form-control" disabled value="{{$data_a->jenis}}">
   
           </div>
-          <div  class="col-md-6">
+          <div  class="col-md-6 col-sm-12">
             <img class="responsive" src="/public/swafoto/{{$data_a->kode_unitkerja}}/{{$data_a->swafoto}}" alt="">
           </div>
         </div>
@@ -97,7 +97,7 @@ use App\AbsenModel;
     </div>
   </div>
   
-  <div class="col-5">
+  <div class="col-md-5 col-sm-12 col-lg-5">
     <div class="card">
       <div class="card-header">
        
