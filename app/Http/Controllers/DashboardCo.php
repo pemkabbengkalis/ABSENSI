@@ -28,7 +28,7 @@ class DashboardCo extends Controller
     $D = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','D')->count();
     $C = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','C')->count();
     $S = AbsenModel::where('kode_unitkerja',Session::get('kode_unitkerja'))->where('status','S')->count();
-    return view($this->index,compact('pegawai','C','D','L'));
+    return view($this->index,compact('pegawai','C','D','S'));
   }else{
     $pegawai = PegawaiModel::count();
     $D = AbsenModel::where('status','D')->count();
