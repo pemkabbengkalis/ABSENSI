@@ -41,6 +41,7 @@ if(Session::get('level')=='user'){
       <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
     </ul>
   </div>
+  @include('theme.Layouts.alert')
 <div class="row">
 <div class="col-md-4 col-sm-12 col-lg-4">
   <div class="card">
