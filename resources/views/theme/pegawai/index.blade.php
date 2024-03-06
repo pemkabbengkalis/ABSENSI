@@ -124,7 +124,7 @@
               <br>
               <br>
               <input type="hidden" name="logold" value="">
-              <input type="file" name="file" id="file" onchange="tampilkanPreview(this,'preview')">
+              <input required type="file" name="file" id="file" onchange="tampilkanPreview(this,'preview')">
               <script>
                 function tampilkanPreview(gambar, idpreview) {
                   //membuat objek gambar
