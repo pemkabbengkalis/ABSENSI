@@ -11,13 +11,14 @@ class userCo extends Controller
 {
   public function __construct()
 {
-  $this->primary = "id_user";
-  $this->main    = "theme.users";
-  $this->level   = Session::get('level');
-  $this->userid  = Session::get('id_user');
-  $this->msukses = 'Data Berhasil disimpan';
-  $this->msupdate = 'Data Berhasil diupdate';
-  $this->index   = $this->main.".index";
+  $this->primary    = "id_user";
+  $this->main       = "theme.users";
+  $this->level      = Session::get('level');
+  $this->userid     = Session::get('id_user');
+  $this->msukses    = 'Data Berhasil disimpan';
+  $this->msupdate   = 'Data Berhasil diupdate';
+  $this->index      = $this->main.".index";
+  $this->dataskpd   = $this->main.".dataskpd";
 
 }
 
@@ -39,6 +40,15 @@ public function index(){
 
   return view($this->index,compact('data','listintansi'));
 }
+
+public function dataskpd(){
+  $class = new Cmenu();
+  $listintansi = (object) $class->listinstansi();
+  $data  = Loginmodel::where('level','user')->get();
+
+  return view($this->dataskpd,compact('data','listintansi'));
+}
+
 public function save(AkunRequest $r){
  
 
