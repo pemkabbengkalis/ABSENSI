@@ -69,7 +69,7 @@
                 closeOnConfirm: false
               },
               function () {
-                swal("Akun dibuka!", "", "success")
+                swal("Akun dihapus!", "", "success")
                 window.location = '{{ url("accountPegawai/hapus") }}/' + id;
 
               }

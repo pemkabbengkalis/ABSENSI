@@ -25,11 +25,15 @@ class userCo extends Controller
 
 
 public function AkunPegawaiByInstansi(){
-  $data   = PegawaiModel::select('tbl_pegawai.id as id','tbl_pegawai.nip as nip','tbl_bidang.id_bidang as id_bidang',
-  'tbl_bidang.bidang as bidang','tbl_pegawai.nama as nama','tbl_pegawai.gd as gd','tbl_pegawai.gb as gb')->join('tbl_penempatan','tbl_penempatan.no','tbl_pegawai.id')
-            ->join('tbl_bidang','tbl_bidang.id_bidang','tbl_penempatan.id_bidang')
-            ->where('tbl_bidang.kode_unitkerja',Session::get('kode_unitkerja'))
-            ->get();
+  $data = PegawaiModel::select('tbl_pegawai.id as id', 'tbl_pegawai.nip as nip', 'tbl_bidang.id_bidang as id_bidang',
+    'tbl_bidang.bidang as bidang', 'tbl_pegawai.nama as nama', 'tbl_pegawai.gd as gd', 'tbl_pegawai.gb as gb')
+    ->leftJoin('tbl_user', 'tbl_user.id_pegawai', '=', 'tbl_pegawai.id')
+    ->join('tbl_penempatan', 'tbl_penempatan.no', '=', 'tbl_pegawai.id')
+    ->join('tbl_bidang', 'tbl_bidang.id_bidang', '=', 'tbl_penempatan.id_bidang')
+    ->where('tbl_bidang.kode_unitkerja', Session::get('kode_unitkerja'))
+    ->groupBy('tbl_pegawai.id')
+    ->get();
+
   $bidang = Bidang::where('kode_unitkerja',Session::get('kode_unitkerja'))->get();
   return view('theme.users.instansi',compact('data'));
 }
