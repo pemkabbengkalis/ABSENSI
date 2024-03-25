@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PegawaiRequest;
 use App\Http\Interfaces\PegawaiInterfaces;
 use Session;
+use App\UserModel;
+use App\Penempatans;
 class PegawaiCo extends Controller
 {
 
@@ -95,7 +97,14 @@ class PegawaiCo extends Controller
  }
  public function delete($id=null){
    try {
-    return $this->DI->delete(base64_decode($id));
+    $check  = UserModel::where('id_pegawai',base64_decode($id))->count();
+    if($check > 0){
+      return back()->with('danger','Opps.. anda tidak dapat menghapus.Pegawai tersebut sudah membuat akun');
+    }else{
+      $this->DI->delete(base64_decode($id));
+      Penempatans::where('no',base64_decode($id))->delete();
+      return back()->with('success','Data berhasil dihapus');
+    }
    } catch (\Throwable $th) {
     return back()->with('danger',$th->getmessage());
    }

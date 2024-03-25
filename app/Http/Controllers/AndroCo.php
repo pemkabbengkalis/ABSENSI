@@ -23,6 +23,7 @@ use DatePeriod;
 use DateInterval;
 use File;
 use Helper;
+use DB;
 use Intervention\Image\ImageManagerStatic as Image;
 class AndroCo extends Controller
 {
@@ -1064,6 +1065,23 @@ public function updateprofile(Request $r){
     return response()->json([
       'message'=>'Data berhasil diupdate',
     ]);
+  }
+}
+
+
+public function deleteaccountunused(){
+  try {
+    $unlinkedData = DB::table('tbl_user')
+    ->select('tbl_user.id_user')
+    ->leftJoin('tbl_pegawai', 'tbl_pegawai.id', '=', 'tbl_user.id_pegawai')
+    ->where('level','ASN')
+    ->whereNull('tbl_pegawai.id')
+    ->get();
+    foreach ($unlinkedData as $key => $value) {
+       UserModel::where('id_user',$value->id_user)->delete();
+    }
+  } catch (\Throwable $th) {
+    print($th->getMessage());
   }
 }
 
