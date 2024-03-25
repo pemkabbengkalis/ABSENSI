@@ -13,7 +13,8 @@ $user        = UserModel::where('id_user',$iduser)->first();
  ?>
  <aside class="app-sidebar">
    <div class="app-sidebar__user">
-     <img style="width:50px;height:50px;" class="app-sidebar__user-avatar" src="{{url('theme/users/'.$user->foto)}}" alt="User Image">
+     <img style="width:50px;height:50px;" class="app-sidebar__user-avatar" src="{{ file_exists(public_path('theme/users/' . $user->foto)) ? url('theme/users/'.$user->foto) : url('theme/users/user.png') }}
+" alt="User Image">
      <div>
        <p class="app-sidebar__user-name">{{$user->nama}}</p>
        <p class="app-sidebar__user-designation">{{$user->level}}</p>

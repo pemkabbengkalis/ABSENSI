@@ -49,10 +49,36 @@
             @if(Helper::getusers($v->nip)->blokir=='N')<a onclick="blokir('{{ base64_encode($v->id) }}')" style="color:white" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Blokir</a>@else <a onclick="opblokir('{{ base64_encode($v->id) }}')" style="color:white" class="btn btn-sm btn-success"><i class="fa fa-unlock"></i> Buka Blokir</a> @endif @endif
             <a onclick="resetpassword('{{ base64_encode($v->id) }}')" style="color:white" class="btn btn-sm btn-warning"><i class="fa fa-undo"></i> Reset</a>
             @endif
+            @if(!empty(Helper::getusers($v->nip)->username))
+            <a onclick="deleteAccount('{{ base64_encode($v->id) }}')" style="color:white" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+            @endif
           </td>
           
          </tr>
          <script>
+
+            function deleteAccount(id) {
+
+            swal({
+                title: "Anda yakin akan menghapus akun ini?",
+                text: "Akun akan di hapus  ",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ya, hapus!",
+                closeOnConfirm: false
+              },
+              function () {
+                swal("Akun dibuka!", "", "success")
+                window.location = '{{ url("accountPegawai/hapus") }}/' + id;
+
+              }
+
+
+
+            );
+
+            }
           function opblokir(id) {
 
             swal({
