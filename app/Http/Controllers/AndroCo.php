@@ -117,6 +117,7 @@ public function apiandro($key=null,$url=null,Request $r){
         }
        break;
       case 'getjam':
+        date_default_timezone_set('Asia/Jakarta');
         $class = new Cmenu();
         $result = array();
         $hari      = $class->gethari(date('Y-m-d'));
@@ -286,6 +287,7 @@ public function getemployee(Request $r){
 
 public function login(Request $r){
    try {
+    date_default_timezone_set('Asia/Jakarta');
     $data = UserModel::where('username',$r->username)->where('password',md5($r->password))->join('tbl_pegawai','tbl_pegawai.id','tbl_user.id_pegawai')->first();
     
     $lokasikantor = KordinatModel::select('latitude','longitude','radius','nama_unitkerja')->where('tbl_kordinat.kode_unitkerja',$data->kode_unitkerja)
@@ -907,6 +909,7 @@ public function addabsen(Request $r){
 }
 public function getdatabyId(Request $r){
    try {
+    date_default_timezone_set('Asia/Jakarta');
     $data = UserModel::where('id_user',$r->id)->join('tbl_pegawai','tbl_pegawai.id','tbl_user.id_pegawai')->first();
     $lokasikantor = KordinatModel::select('latitude','longitude','radius','nama_unitkerja')->where('tbl_kordinat.kode_unitkerja',$data->kode_unitkerja)
     ->join('data_unitkerja','data_unitkerja.kode_unitkerja','tbl_kordinat.kode_unitkerja')->first();
