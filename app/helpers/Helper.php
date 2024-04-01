@@ -9,7 +9,8 @@ use App\JamModel;
 use Intervention\Image\ImageManagerStatic as Image;
 session_start();
 class Helper {
-    public static function cekhari(){
+  public static function cekhari(){
+  date_default_timezone_set('Asia/Jakarta');
 	$hari = date ("D");
  
 	switch($hari){
