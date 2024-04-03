@@ -814,25 +814,39 @@ public function addabsenluarkantor(Request $r){
         'masaizin'=>null,
       ];
       try {
-        $act  = AbsenModel::insert($data);
-        $path = public_path().'/'.$target_dir;
-        if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-        }   
-        file_put_contents($path.'/'.$imagename, $image_base64);
-        $class = new Cmenu();
-        $user  = UserModel::where('id_user',$r->id)->first();
-        if(!empty($user)){
-          $title = $user->nama;
-          $body  = "Absen Luar Kantor anda berhasil di upload. selanjutnya akan di cek oleh BKPP";
-          $class->sendNotification($user->token_firebase, $title, $body);
-        }
-       
-        $result =[
-          'message'=>'Absen Berhasil dilakukan',
-          'success'=>true
-        ];
-        print json_encode($result);
+        $checkAbsen = AbsenModel::where('id_pegawai',$r->id)
+                            ->where('tglabsen',date('Y-m-d'))
+                            ->where('jenis',$r->jenis)
+                            ->count();
+              if($checkAbsen > 0){
+                $result =[
+                  'message'=>'Sudah Melakukan Absen',
+                  'success'=>true
+                ];
+                print json_encode($result);
+              }else{
+                $act  = AbsenModel::insert($data);
+                $path = public_path().'/'.$target_dir;
+                if(!File::isDirectory($path)){
+                    File::makeDirectory($path, 0777, true, true);
+                }   
+                file_put_contents($path.'/'.$imagename, $image_base64);
+                $class = new Cmenu();
+                $user  = UserModel::where('id_user',$r->id)->first();
+                if(!empty($user)){
+                  $title = $user->nama;
+                  $body  = "Absen Luar Kantor anda berhasil di upload. selanjutnya akan di cek oleh BKPP";
+                  $class->sendNotification($user->token_firebase, $title, $body);
+                }
+               
+                $result =[
+                  'message'=>'Absen Berhasil dilakukan',
+                  'success'=>true
+                ];
+                print json_encode($result);
+              }
+
+        
       } catch (\Throwable $th) {
         $result =[
           'message'=>$th->getmessage(),
@@ -878,24 +892,37 @@ public function addabsen(Request $r){
               'masaizin'=>null,
             ];
             try {
-              $act  = AbsenModel::insert($data);
-              $path = public_path().'/'.$target_dir;
-              if(!File::isDirectory($path)){
-                  File::makeDirectory($path, 0777, true, true);
-              }   
-              file_put_contents($path.'/'.$imagename, $image_base64);
-              $class = new Cmenu();
-              $user  = UserModel::where('id_user',$r->id)->first();
-              if(!empty($user)){
-                $title = $user->nama;
-                $body  = "Absensi di kantor sudah berhasil di upload";
-                $class->sendNotification($user->token_firebase, $title, $body);
+              $checkAbsen = AbsenModel::where('id_pegawai',$r->id)
+                            ->where('tglabsen',date('Y-m-d'))
+                            ->where('jenis',$r->jenis)
+                            ->count();
+              if($checkAbsen > 0){
+                $result =[
+                  'message'=>'Sudah Melakukan Absen',
+                  'success'=>true
+                ];
+                print json_encode($result);
+              }else{
+                $act  = AbsenModel::insert($data);
+                $path = public_path().'/'.$target_dir;
+                if(!File::isDirectory($path)){
+                    File::makeDirectory($path, 0777, true, true);
+                }   
+                file_put_contents($path.'/'.$imagename, $image_base64);
+                $class = new Cmenu();
+                $user  = UserModel::where('id_user',$r->id)->first();
+                if(!empty($user)){
+                  $title = $user->nama;
+                  $body  = "Absensi di kantor sudah berhasil di upload";
+                  $class->sendNotification($user->token_firebase, $title, $body);
+                }
+                $result =[
+                  'message'=>'Absen Berhasil dilakukan',
+                  'success'=>true
+                ];
+                print json_encode($result);
               }
-              $result =[
-                'message'=>'Absen Berhasil dilakukan',
-                'success'=>true
-              ];
-              print json_encode($result);
+             
             } catch (\Throwable $th) {
               $result =[
                 'message'=>$th->getmessage(),
