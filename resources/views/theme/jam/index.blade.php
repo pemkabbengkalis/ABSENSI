@@ -37,7 +37,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php $hari = array('senin','selasa','rabu','kamis','jumat'); ?>
+            <?php $hari = array('senin','selasa','rabu','kamis','jumat','sabtu'); ?>
            @foreach($hari as $vhari)
            <?php
 
