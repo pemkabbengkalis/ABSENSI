@@ -13,6 +13,7 @@ $apps = AplikasiModel::where('id_app','1')->first();
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Aplikasi Absensi</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body>
     <section class="material-half-bg">
@@ -37,7 +38,9 @@ $apps = AplikasiModel::where('id_app','1')->first();
             <label class="control-label">PASSWORD</label>
             <input class="form-control" type="password" name="pass" placeholder="Password" required>
           </div>
-
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LcMe6spAAAAAKk1RoBL_0eAdWUZm9aADXzbtqnU"></div>
+          </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>MASUK</button>
           </div>

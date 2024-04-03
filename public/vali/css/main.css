@@ -102,6 +102,33 @@ hr {
   overflow: visible;
 }
 
+.tab-nav-conf {
+  margin: 10px 0px;
+  background: #b4b4b4;
+  padding: 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.tab-nav-conf:hover {
+  margin: 10px 0px;
+  background: #f2bf3c;
+  padding: 10px;
+  color:white;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.tab-nav-conf a{
+  color:white;
+}
+.tab-nav-conf a:hover{
+  text-decoration: none;
+}
+
+.title-tab{
+  margin: 5px 0px;
+}
+
+
 h1,
 h2,
 h3,
@@ -17005,12 +17032,12 @@ be a descendant of the grid when it is being dragged.
 .login-content .login-box {
   position: relative;
   min-width: 350px;
-  min-height: 400px;
+  min-height: 446px;
   background-color: #fff;
   -webkit-box-shadow: 0px 29px 147.5px 102.5px rgba(0, 0, 0, 0.05),
-    0px 29px 95px 0px rgba(0, 0, 0, 0.16);
+  0px 29px 95px 0px rgba(0, 0, 0, 0.16);
   box-shadow: 0px 29px 147.5px 102.5px rgba(0, 0, 0, 0.05),
-    0px 29px 95px 0px rgba(0, 0, 0, 0.16);
+  0px 29px 95px 0px rgba(0, 0, 0, 0.16);
   -webkit-perspective: 800px;
   perspective: 800px;
   -webkit-transition: all 0.5s ease-in-out;
@@ -17048,14 +17075,13 @@ be a descendant of the grid when it is being dragged.
   margin-bottom: 0;
 }
 
-.login-content .login-box .login-form,
-.login-content .login-box .forget-form {
+.login-content .login-box .login-form, .login-content .login-box .forget-form {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px;
+  padding: 24px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all 0.5s ease-in-out;
