@@ -6,6 +6,7 @@ use App\Cmenu;
 use App\Loginmodel;
 use App\PegawaiModel;
 use App\AbsenModel;
+use App\UserModel;
 use App\Bidang;
 use App\Http\Requests\AkunRequest;
 class userCo extends Controller
@@ -56,11 +57,21 @@ public function SelectByInstansi($unitkerja){
         foreach ($data as $pegawai) {
         $options[] = [
         'id' => $pegawai->id,
-        'text' => $pegawai->nama // You can customize this to display more information if needed
+        'text' => $pegawai->nama.' '.$pegawai->gb,
+        'selected' => $this->checkbypass($pegawai->id)
         ];
         }
 
         return response()->json($options);
+}
+
+public function checkbypass($id){
+    $check = UserModel::where('id_pegawai',$id)->where('bypass','Y')->count();
+    $selected = '';
+    if($check > 0){
+       $selected = 'selected';
+    }
+    return $selected;
 }
 
 public function index(){

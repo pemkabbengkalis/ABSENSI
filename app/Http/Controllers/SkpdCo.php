@@ -8,6 +8,8 @@ use Session;
 use App\RouteModel;
 use App\KordinatModel;
 use App\Cmenu;
+use App\UserModel;
+use App\JamModel;
 use App\KecamatanModel;
 class SkpdCo extends Controller
 {
@@ -80,6 +82,102 @@ try {
        return back()->with('danger',$th->getmessage());
      }
  }
+
+ public function skpdSettingCentral(Request $r) {
+  
+  if ($r->has('bypass')) {
+    $data = [
+      'bypass' => 'N'
+    ];
+    UserModel::where('kode_unitkerja',$r->idinstansi)->update($data);
+      foreach ($r->bypass as $v) {
+          try {
+              $check = UserModel::where('id_pegawai', $v)->count();
+              if ($check > 0) {
+                  $data = [
+                      'bypass' => 'Y'
+                  ];
+                  UserModel::where('id_pegawai', $v)->update($data);
+              }
+          } catch (\Throwable $th) {
+              throw $th;
+          }
+      }
+  }
+  
+  /***
+   * JAM 
+   */
+
+   $hari = array('senin','selasa','rabu','kamis','jumat','sabtu');
+   foreach ($hari as $i => $v) {
+       $jamMasuk  = isset($r->jammasuk[$i]) ? $r->jammasuk[$i] : null;
+       $jamPulang = isset($r->jampulang[$i]) ? $r->jampulang[$i] : null;
+       $batasAbsenMasuk = isset($r->batasabsenmasuk[$i]) ? $r->batasabsenmasuk[$i] : null;
+       $batasAbsenPulang = isset($r->batasabsenpulang[$i]) ? $r->batasabsenpulang[$i] : null;
+       
+       if($jamMasuk != null && $jamPulang != null && $batasAbsenMasuk != null && $batasAbsenPulang != null){
+        $checkJamMasuk = JamModel::where('hari',$v)->where('jenis','Jam Masuk')
+          ->where('kode_unitkerja',$r->idinstansi)
+          ->count();
+        if($checkJamMasuk > 0){
+          $data=[
+            'kode_unitkerja'=> $r->idinstansi,
+            'jenis'=> 'Jam Masuk',
+            'hari'=> $v,
+            'jam'=> $jamMasuk,
+            'batas'=> $batasAbsenMasuk,
+          ];
+          JamModel::where('hari',$v)
+                 ->where('jenis','Jam Masuk')
+                 ->where('kode_unitkerja',$r->idinstansi)
+                 ->update($data);
+        }else{
+          $data=[
+            'kode_unitkerja'=> $r->idinstansi,
+            'jenis'=> 'Jam Masuk',
+            'hari'=> $v,
+            'jam'=> $jamMasuk,
+            'batas'=> $batasAbsenMasuk,
+          ];
+          JamModel::insert($data);
+        }
+
+        //Jam Pulang
+
+        $checkJamPulang = JamModel::where('hari',$v)->where('jenis','Jam Pulang')
+        ->where('kode_unitkerja',$r->idinstansi)
+        ->count();
+      if($checkJamPulang > 0){
+        $data=[
+          'kode_unitkerja'=> $r->idinstansi,
+          'jenis'=> 'Jam Pulang',
+          'hari'=> $v,
+          'jam'=> $jamPulang,
+          'batas'=> $batasAbsenPulang,
+        ];
+        JamModel::where('hari',$v)
+               ->where('jenis','Jam Pulang')
+               ->where('kode_unitkerja',$r->idinstansi)
+               ->update($data);
+      }else{
+        $data=[
+          'kode_unitkerja'=> $r->idinstansi,
+          'jenis'=> 'Jam Pulang',
+          'hari'=> $v,
+          'jam'=> $jamPulang,
+          'batas'=> $batasAbsenPulang,
+        ];
+        JamModel::insert($data);
+      }
+
+       }
+       
+   }
+
+  return back();
+}
+
 
 
 
