@@ -864,7 +864,8 @@ public function addabsen(Request $r){
         $latitude  = ($r->has('latitude')) ? $r->latitude:'0';
         $longitude = ($r->has('longitude')) ? $r->longitude:'0';
         $ip = $this->get_client_ip();
-         if ($r->swa) {
+        $imagename = 'noimage.png';
+         if ($r->has('swa') && !empty($r->swa)) {
             $base64Image = explode(";base64,", $r->swa);
             $explodeImage = explode("image/", $base64Image[0]);
             $imageType = $explodeImage[1];
@@ -904,11 +905,13 @@ public function addabsen(Request $r){
                 print json_encode($result);
               }else{
                 $act  = AbsenModel::insert($data);
+                if ($r->has('swa') && !empty($r->swa)) {
                 $path = public_path().'/'.$target_dir;
                 if(!File::isDirectory($path)){
                     File::makeDirectory($path, 0777, true, true);
                 }   
                 file_put_contents($path.'/'.$imagename, $image_base64);
+                }
                 $class = new Cmenu();
                 $user  = UserModel::where('id_user',$r->id)->first();
                 if(!empty($user)){

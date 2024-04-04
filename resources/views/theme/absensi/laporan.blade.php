@@ -203,7 +203,7 @@ use App\AbsenModel;
             <form action="{{url('cetakabsensi')}}" method="post">
             <div class="modal-body">
               <label>Pilih Perangkat Daerah</label>
-              <select  class="form-control""
+              <select style="width:100%;height:80px"  class="form-control select2" id="exampleSelect2"
                             name="skpd">
                             @foreach($skpd as $i =>$v)
                             <option value="{{$v->kode_unitkerja}}">{{$v->nama_unitkerja}}</option>
@@ -224,27 +224,31 @@ use App\AbsenModel;
       
         </div>
       </div>
-      <a data-toggle="modal" data-target="#cetak" style="float:right;color:white" class="btn btn-primary"><i class="fa fa-print"></i> Cetak data</a>
-     
-      <select id="jenisabsen" class="form-control" style="width:20%;float:right;margin-right:2px;" name="jenis">
-       
-        <option value="M">Masuk</option>
-        <option value="P">Pulang</option>
-      </select>
-      <select id="skpd" class="form-control" style="width:20%;float:right;margin-right:2px;"
+      <div style="width:100%;display:flex">
+      <h4 class="card-title" style="
+    width: 29%;
+"><i class="fa fa-calendar"></i> Data Absensi</h4>
+
+
+      <select id="skpd" class="form-control select2" style="width:20%;float:right;margin-right:2px;"
                             name="skpd">
                             @foreach($skpd as $i =>$v)
                             <option value="{{$v->kode_unitkerja}}">{{$v->nama_unitkerja}}</option>
                             @endforeach
                         </select>
-      <input id="tgl"  style="width:20%;float:right;margin-right:2px;" type="date" name="tgl" class="form-control" value="{{  date('Y-m-d') }}">
-    <h4 class="card-title"><i class="fa fa-calendar"></i> Data Absensi</h4>
+                        <select id="jenisabsen" class="form-control" style="width:20%;float:right;margin-right:2px;" name="jenis">
+       
+       <option value="M">Masuk</option>
+       <option value="P">Pulang</option>
+     </select>
+     <input id="tgl"  style="width:20%;float:right;margin-right:2px;" type="date" name="tgl" class="form-control" value="{{  date('Y-m-d') }}">
 
-
-      <h6 class="card-subtitle">
-        Data absensi ini di record berdasarkan record pegawai yang melakukan absensi
-      </h6>
-
+      <a data-toggle="modal" data-target="#cetak" style="float:right;color:white" class="btn btn-primary"><i class="fa fa-print"></i> Cetak data</a>
+     
+     
+      
+  </div>
+   
     </div>
     <div class="card-body">
       
