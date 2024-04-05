@@ -900,7 +900,7 @@ public function addabsen(Request $r){
               if($checkAbsen > 0){
                 $result =[
                   'message'=>'Sudah Melakukan Absen',
-                  'success'=>true
+                  'success'=>false
                 ];
                 print json_encode($result);
               }else{
