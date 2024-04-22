@@ -821,7 +821,7 @@ public function addabsenluarkantor(Request $r){
               if($checkAbsen > 0){
                 $result =[
                   'message'=>'Sudah Melakukan Absen',
-                  'success'=>true
+                  'success'=>false
                 ];
                 print json_encode($result);
               }else{
@@ -858,84 +858,92 @@ public function addabsenluarkantor(Request $r){
 
       
 }
-public function addabsen(Request $r){
-        $unitkerja  = $this->getdataid($r->id);
-        $target_dir = 'swafoto/'.$unitkerja['kode_unitkerja'];
-        $latitude  = ($r->has('latitude')) ? $r->latitude:'0';
-        $longitude = ($r->has('longitude')) ? $r->longitude:'0';
-        $ip = $this->get_client_ip();
-        $imagename = 'noimage.png';
-         if ($r->has('swa') && !empty($r->swa)) {
-            $base64Image = explode(";base64,", $r->swa);
-            $explodeImage = explode("image/", $base64Image[0]);
-            $imageType = $explodeImage[1];
-            $image_base64 = base64_decode($base64Image[1]);
-            $imagename = uniqid() . '.'.$imageType;
-            $file = $target_dir.'/'.$imagename;
-            
-        }
-       
-        $result    = array();
-        $data=[
-              'id_absen'=>uniqid(),
-              'id_pegawai'=>$r->id,
-              'status'=>$r->status,
-              'keterangan'=>'Hadir',
-              'jenis'=>$r->jenis,
-              'kode_unitkerja'=>$unitkerja['kode_unitkerja'],
-              'no_surat'=>null,
-              'latitude'=>$latitude,
-              'longitude'=>$longitude,
-              'swafoto'=>$imagename,
-              'ip'=>$ip,
-              'tglabsen'=>date('Y-m-d'),
-              'file'=>null,
-              'masaizin'=>null,
-            ];
-            try {
-              $checkAbsen = AbsenModel::where('id_pegawai',$r->id)
-                            ->where('tglabsen',date('Y-m-d'))
-                            ->where('jenis',$r->jenis)
-                            ->count();
-              if($checkAbsen > 0){
-                $result =[
-                  'message'=>'Sudah Melakukan Absen',
-                  'success'=>false
-                ];
-                print json_encode($result);
-              }else{
-                $act  = AbsenModel::insert($data);
-                if ($r->has('swa') && !empty($r->swa)) {
-                $path = public_path().'/'.$target_dir;
-                if(!File::isDirectory($path)){
-                    File::makeDirectory($path, 0777, true, true);
-                }   
-                file_put_contents($path.'/'.$imagename, $image_base64);
-                }
-                $class = new Cmenu();
-                $user  = UserModel::where('id_user',$r->id)->first();
-                if(!empty($user)){
-                  $title = $user->nama;
-                  $body  = "Absensi di kantor sudah berhasil di upload";
-                  $class->sendNotification($user->token_firebase, $title, $body);
-                }
-                $result =[
-                  'message'=>'Absen Berhasil dilakukan',
-                  'success'=>true
-                ];
-                print json_encode($result);
-              }
-             
-            } catch (\Throwable $th) {
-              $result =[
-                'message'=>$th->getmessage(),
-                'success'=>false
-              ];
-              print json_encode($result);
-            }
-            
+public function addabsen(Request $r)
+{
+    $unitkerja  = $this->getdataid($r->id);
+    $target_dir = 'swafoto/'.$unitkerja['kode_unitkerja'];
+    $latitude   = $r->filled('latitude') ? $r->latitude : '0';
+    $longitude  = $r->filled('longitude') ? $r->longitude : '0';
+    $ip         = $this->get_client_ip();
+    $imagename  = 'noimage.png';
 
-            
+    if ($r->filled('swa')) {
+        $base64Image  = explode(";base64,", $r->swa);
+        $explodeImage = explode("image/", $base64Image[0]);
+        $imageType    = $explodeImage[1];
+        $image_base64 = base64_decode($base64Image[1]);
+        $imagename    = uniqid().'.'.$imageType;
+        $file         = $target_dir.'/'.$imagename;
+    }
+
+    $result = [];
+
+    DB::beginTransaction();
+
+    try {
+        $checkAbsen = AbsenModel::where('id_pegawai', $r->id)
+            ->where('tglabsen', date('Y-m-d'))
+            ->where('jenis', $r->jenis)
+            ->count();
+
+        if ($checkAbsen > 0) {
+            $result = [
+                'message' => 'Sudah Melakukan Absen',
+                'success' => false
+            ];
+        } else {
+            $data = [
+                'id_absen' => uniqid(),
+                'id_pegawai' => $r->id,
+                'status' => $r->status,
+                'keterangan' => 'Hadir',
+                'jenis' => $r->jenis,
+                'kode_unitkerja' => $unitkerja['kode_unitkerja'],
+                'no_surat' => null,
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'swafoto' => $imagename,
+                'ip' => $ip,
+                'tglabsen' => date('Y-m-d'),
+                'file' => null,
+                'masaizin' => null,
+            ];
+
+            $act = AbsenModel::insert($data);
+
+            if ($r->filled('swa')) {
+                $path = public_path().'/'.$target_dir;
+                if (!File::isDirectory($path)) {
+                    File::makeDirectory($path, 0777, true, true);
+                }
+                file_put_contents($path.'/'.$imagename, $image_base64);
+            }
+
+            $class = new Cmenu();
+            $user  = UserModel::where('id_user', $r->id)->first();
+
+            if (!empty($user)) {
+                $title = $user->nama;
+                $body  = "Absensi di kantor sudah berhasil di upload";
+                $class->sendNotification($user->token_firebase, $title, $body);
+            }
+
+            $result = [
+                'message' => 'Absen Berhasil dilakukan',
+                'success' => true
+            ];
+        }
+
+        DB::commit();
+    } catch (\Throwable $th) {
+        DB::rollback();
+        $result = [
+            'message' => $th->getMessage(),
+            'success' => false
+        ];
+    }
+
+    return response()->json($result);
 }
 public function getdatabyId(Request $r){
    try {
