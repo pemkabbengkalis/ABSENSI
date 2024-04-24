@@ -300,6 +300,8 @@ public function absenmanual(Request $r){
     $keterangan = ($r->status=='S')?'Sakit':$keterangan;
     $keterangan = ($r->status=='P')?'Pendidikan':$keterangan;
     $keterangan = ($r->status=='D')?'Dinas':$keterangan;
+    $tglManual  = $r->tglmanual;
+    $timeManual = $r->tglmanual.' '.$r->timemanual;
     $ip = $this->get_client_ip();
     $data=[
       'id_absen'=>uniqid(),
@@ -312,8 +314,8 @@ public function absenmanual(Request $r){
       'longitude'=>'',
       'swafoto'=>'absenmanual.png',
       'ip'=>$ip,
-      'tglabsen'=>date('Y-m-d'),
-      'tglabsen'=>date('Y-m-d'),
+      'tglabsen'=>$tglManual,
+      'time'=>$timeManual,
     ];
     try {
       AbsenModel::insert($data);
@@ -412,6 +414,10 @@ public function apiabsen(Request $r){
               <option value="P">Absen Pulang</option>
             </select>
             </div>
+            <label>Tanggal Absensi</label>
+            <input type="date" name="tglmanual" class="form-control" required>
+            <label>Waktu Absensi</label>
+            <input type="time" name="timemanual" class="form-control" required>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
           </div>
@@ -486,6 +492,10 @@ public function getdataabsenfromjenis(Request $r){
               <option value="M">Absen Masuk</option>
               <option value="P">Absen Pulang</option>
             </select>
+            <label>Tanggal Absensi</label>
+            <input type="date" name="tglmanual" class="form-control" required>
+            <label>Waktu Absensi</label>
+            <input type="time" name="timemanual" class="form-control" required>
             </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Update</button>
