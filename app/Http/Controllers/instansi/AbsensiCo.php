@@ -51,7 +51,7 @@ public function cetakabsensi(Request $r){
   if(Session::get('level')=='user'){
     $dataabsen    = array();
     $ki       = substr(Session::get('kode_unitkerja'),0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $start    = $r->from;
     $end      = $r->to;
     $implodedate = [$start, $end];
@@ -84,7 +84,7 @@ public function cetakabsensi(Request $r){
   }else if(Session::get('level')=='BKPP'){
     $dataabsen    = array();
     $ki       = substr($r->skpd,0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $start    = $r->from;
     $end      = $r->to;
     $implodedate = [$start, $end];

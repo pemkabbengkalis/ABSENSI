@@ -158,6 +158,11 @@
             </div>
 
             <div class="form-group">
+              <label>Urutan Pegawai</label>
+              <i>Tentukan Urutan Pegawai yang akan ditampilkan</i>
+              <input type="number" class="form-control" name="urut" value="">
+            </div>
+            <div class="form-group">
               <label>NIP</label>
               <input type="text" class="form-control" name="nip" value="">
             </div>
