@@ -6,6 +6,7 @@ class PegawaiModel extends Model
   protected $table = 'tbl_pegawai';
   public $timestamps = true;
   protected $fillable = [
+    'urutan',
     'nip',
     'nama',
     'email',
