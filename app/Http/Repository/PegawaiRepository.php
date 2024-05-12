@@ -19,7 +19,7 @@ class PegawaiRepository implements PegawaiInterfaces
 
     public function all()
     {
-        return $this->model->where('kode_unitkerja',Session::get('kode_unitkerja'))->orderby('id','DESC')->get();
+        return $this->model->where('kode_unitkerja',Session::get('kode_unitkerja'))->orderby('urutan','ASC')->get();
     }
 
       public function base64_decode($image,$titleimg){

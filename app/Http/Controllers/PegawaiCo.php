@@ -29,7 +29,9 @@ class PegawaiCo extends Controller
     if($r->has('file')){
     $imgbase64 = base64_encode(file_get_contents($r->file('file')));
     $titleimg  = uniqid().'.png';
+    $urut = (!empty($r->urut)) ? $r->urut : 5;
     $data = [
+      'urutan'=>$urut,
       'nip'=>$r->nip,
       'nama'=>$r->nama,
       'email'=>$r->email,
@@ -59,7 +61,9 @@ class PegawaiCo extends Controller
     $titleimg  = uniqid().'.png';
     $imageold  = $r->imageold;
     $id        = $r->id;
+    $urut = (!empty($r->urut)) ? $r->urut : 5;
     $data = [
+      'urutan'=>$urut,
       'nip'=>$r->nip,
       'nama'=>$r->nama,
       'email'=>$r->email,
@@ -77,7 +81,9 @@ class PegawaiCo extends Controller
     return back()->with('success','Data berhasil disimpan');
     }else{
       $id   = $r->id;
+      $urut = (!empty($r->urut)) ? $r->urut : 5;
       $data = [
+        'urutan'=>$urut,
         'nip'=>$r->nip,
         'nama'=>$r->nama,
         'email'=>$r->email,
