@@ -42,7 +42,7 @@ public function index(){
   
   $data     = $class->getpegawaiinstansi($ki);*/
   $ki       = substr(Session::get('kode_unitkerja'),0,8);
-  $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+  $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
   return view($this->index,compact('pg'));
 }
 
@@ -362,11 +362,11 @@ public function hapus($id=null){
 public function apiabsen(Request $r){
   if(Session::get('level')=='BKPP'){
     $ki       = substr($r->skpd,0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $viewabsen= 'laporanabsensi';
   }else{
     $ki       = substr(Session::get('kode_unitkerja'),0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $viewabsen= 'dataabsensi';
   }
   $array    = array();
@@ -443,11 +443,11 @@ public function getdataabsenfromjenis(Request $r){
   $array    = array();
   if(Session::get('level')=='BKPP'){
     $ki       = substr($r->skpd,0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $viewabsen= 'laporanabsensi';
   }else{
     $ki       = substr(Session::get('kode_unitkerja'),0,8);
-    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->get();
+    $pg       = PegawaiModel::where('kode_unitkerja','LIKE','%'.$ki.'%')->orderby('urutan','asc')->get();
     $viewabsen= 'dataabsensi';
   }
   foreach($pg as $i => $v){
