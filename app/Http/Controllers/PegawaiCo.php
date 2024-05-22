@@ -40,7 +40,7 @@ class PegawaiCo extends Controller
       'nohp'=>$r->nohp,
       'pangkat_gol'=>$r->pangkat_gol,
       'image'=>$titleimg,
-      'satatus'=>'ASN',
+      'status'=>$r->type,
       'kode_unitkerja'=>Session::get('kode_unitkerja'),
       'cerated_at'=>now(),
       'updated_at'=>now()
@@ -72,7 +72,7 @@ class PegawaiCo extends Controller
       'nohp'=>$r->nohp,
       'pangkat_gol'=>$r->pangkat_gol,
       'image'=>$titleimg,
-      'status'=>'ASN',
+      'status'=>$r->type,
       'kode_unitkerja'=>Session::get('kode_unitkerja'),
       'created_at'=>now(),
       'updated_at'=>now()
@@ -86,6 +86,7 @@ class PegawaiCo extends Controller
         'urutan'=>$urut,
         'nip'=>$r->nip,
         'nama'=>$r->nama,
+        'status'=>$r->type,
         'email'=>$r->email,
         'gd'=>$r->gd,
         'pangkat_gol'=>$r->pangkat_gol,

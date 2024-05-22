@@ -60,7 +60,16 @@
             </div>
             <div class="form-group">
               <label>NIP</label>
+              <br>
+              <i>untuk pegawai bukan ASN / Tenaga Honorer menggunakan NIK</i>
               <input type="text" class="form-control" name="nip" value="{{ $v->nip }}">
+            </div>
+            <div class="form-group">
+              <label>TYPE PEGAWAI</label>
+              <select name="type" class="form-control" id="">
+                <option value="ASN" @if($v->status=='ASN') selected @endif>ASN</option>
+                <option value="NONASN" @if($v->status=='NONASN') selected @endif>NONASN</option>
+              </select>
             </div>
             <div class="form-group">
               <label>Nama</label>

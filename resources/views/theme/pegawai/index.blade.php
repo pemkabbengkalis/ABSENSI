@@ -163,9 +163,19 @@
               <input type="number" class="form-control" name="urut" value="">
             </div>
             <div class="form-group">
-              <label>NIP</label>
+              <label>NIP / NIK</label>
+              <br>
+              <i>untuk pegawai bukan ASN / Tenaga Honorer menggunakan NIK</i>
               <input type="text" class="form-control" name="nip" value="">
             </div>
+            <div class="form-group">
+              <label>TYPE PEGAWAI</label>
+              <select name="type" class="form-control" id="">
+                <option value="ASN">ASN</option>
+                <option value="NONASN">NONASN</option>
+              </select>
+            </div>
+
             <div class="form-group">
               <label>Nama</label>
               <input type="text" class="form-control" name="nama" value="">
@@ -192,6 +202,8 @@
               <label>Email</label>
               <input type="text" class="form-control" name="email" value="">
             </div>
+
+            
 
             <ul class="list-group">
               <button class="btn btn-primary" type="submit">Simpan</button>
