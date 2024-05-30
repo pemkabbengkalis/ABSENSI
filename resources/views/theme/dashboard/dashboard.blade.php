@@ -154,9 +154,15 @@ if(Session::get('level')=='user'){
 
           @foreach($datamarker as $key => $v)
           <?php
-          $instansi = $class->namainstansi($v->kode_unitkerja);
-          ?>
+                        $instansi = $class->namainstansi($v->kode_unitkerja);
+                        if($instansi != null){
+                            
+                      
+                        ?>
           ['<h4><b style="color:red;">{{$instansi->nama_unitkerja}}</b></h4><hr><br><b>Kode Unitkerja </b>: </b> {{$v->kode_unitkerja}}<br><b>Kecamatan</b> : {{$instansi->kecamatan}}<br><b>Alamat</b> : {{$instansi->alamat}}<br><b>Radius</b> : <b style="color:red;">{{$v->radius}} meter</b><br><b>Latitude </b> : <b style="color:#ffae00;">{{$v->latitude}}</b><br><b>Longitude</b> : <b style="color:#ffae00;">{{$v->longitude}}</b>', {{$v->latitude}}, {{$v->longitude}},{{$v->radius}}],
+          <?php
+                        }
+                        ?>
           @endforeach
 
           ];
