@@ -8,6 +8,7 @@
       use App\PegawaiModel;
       use App\TblMutasi;
       use App\JobMutasi;
+      use App\Cmenu;
       use App\Penempatans;
       use App\Bidang;
       use Intervention\Image\ImageManagerStatic as Image;
@@ -19,7 +20,11 @@
       }
 
       public function index(){
-          print("success");
+          $class       = new Cmenu();
+          $opd         = (object) $class->listinstansi();
+          $pegawai     = PegawaiModel::all();
+          $data        = JobMutasi::select('asal_instansi','job_mutasi.status as status','pindah_instansi','job_mutasi.created_at as created_at','job_mutasi.pegawai_id as pegawai_id','tbl_pegawai.nama as nama','tbl_pegawai.gd as gd','tbl_pegawai.gb as gb','job_mutasi.catatan as catatan')->join('tbl_pegawai','tbl_pegawai.id','job_mutasi.pegawai_id')->orderBy('job_mutasi.id','desc')->get();
+          return view('theme.mutasi.index',compact('pegawai','opd','data'));
       }
 
       public function pindahPegawai(){
@@ -132,13 +137,16 @@
         }
       }
       public function save(Request $r){
+        $mutasi = TblMutasi::where('status','OPEN')->where('pegawai_id',$r->pegawai_id)->first();
         $data =[
-
+          'pegawai_id'=>$r->pegawai_id,
+          'asal_instansi'=>$mutasi->instansi_id,
+          'pindah_instansi'=>$r->pindah_instansi,
+          'status'=>'PENDING'
         ];
-
-        $act = Jabatan::insert($data);
+        $act = JobMutasi::insert($data);
         if($act){
-          return back()->with();
+          return back()->with('success','Daftar Mutasi Berhasil ditambahkan System akan berjalan otomatis untuk melakukan pemindahan. pastikan anda memonitoring status di table daftar Mutasi.');
         }
 
       }

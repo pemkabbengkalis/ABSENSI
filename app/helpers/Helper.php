@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use App\RouteModel;
 use App\Loginmodel;
 use App\JamModel;
+use App\InstansiModel;
 use App\TblMutasi;
 use Intervention\Image\ImageManagerStatic as Image;
 session_start();
@@ -180,5 +181,10 @@ class Helper {
         } catch (\Throwable $th) {
           //throw $th;
         }
+    }
+
+    public static function nameSkpd($kodeskpd){
+        $skpd = InstansiModel::where('kode_unitkerja',$kodeskpd)->first();
+        return $skpd;
     }
 }
