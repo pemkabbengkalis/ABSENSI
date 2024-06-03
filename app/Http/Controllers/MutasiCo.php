@@ -7,6 +7,9 @@
       use App\UserModel;
       use App\PegawaiModel;
       use App\TblMutasi;
+      use App\JobMutasi;
+      use App\Penempatans;
+      use App\Bidang;
       use Intervention\Image\ImageManagerStatic as Image;
       class MutasiCo extends Controller
       {
@@ -58,6 +61,75 @@
         print 'BERHASIL : '.$berhasil.'<br>'.'GAGAL : '.$gagal.'<br> SUDAH ADA :'.$tersedia;
 
         
+      }
+
+      public function jobPindahPegawai(Request $r){
+        $catatan = 'SUCCESS';
+        try {
+          $data = JobMutasi::where('status','PENDING')->get();
+          foreach ($data as $i => $v) {
+            $rmvPenempatan = Bidang::join('tbl_penempatan','tbl_penempatan.id_bidang','tbl_bidang.id_bidang')->where('no',$v->pegawai_id)->delete();
+            if(!$rmvPenempatan){
+              $catatan = 'GAGAL MENGHAPUS PENEMPATAN';
+            }
+            /**
+             * update Pegawai Kode Unitkerja
+             */
+            $datapg = [
+              'kode_unitkerja'=>$v->pindah_instansi
+            ];
+            $pg  = PegawaiModel::where('id',$v->pegawai_id)->update($datapg);
+            if(!$pg){
+              $catatan = 'GAGAL MENGUPDATE DATA PEGAWAI KE INSTANSI BARU';
+            }
+
+            /**
+             * UPDATE USER LOGIN
+             */
+
+             $user = UserModel::where('id_pegawai',$v->pegawai_id)->update($datapg);
+             if(!$user){
+              $catatan = 'GAGAL MENGUPDATE DATA LOGIN KE INSTANSI BARU';
+            }
+
+            $mutasi = [
+              'status'=>'CLOSED',
+            ];
+            $act = TblMutasi::where('pegawai_id',$v->pegawai_id)->where('instansi_id',$v->asal_instansi)->update($mutasi);
+
+            $mutasi = [
+              'pegawai_id'=>$v->pegawai_id,
+              'instansi_id'=>$v->pindah_instansi,
+              'status'=>'OPEN',
+              'tahun'=>date('Y'),
+              'catatan'=>'Pegawai Aktif'
+            ];
+            $act = TblMutasi::insert($mutasi);
+
+            /***
+             * UPDATE STATUS
+             */
+            if($catatan == 'SUCCESS'){
+              $data = [
+                'status'=>'DONE',
+                'catatan'=>'PINDAH PEGAWAI BERHASIL'
+              ];
+              $update = JobMutasi::where('id',$v->id)->update($data);
+            }else{
+              $data = [
+                'status'=>'ERROR',
+                'catatan'=>$catatan
+              ];
+              $update = JobMutasi::where('id',$v->id)->update($data);
+            }
+          }
+        } catch (\Throwable $th) {
+          $data = [
+            'status'=>'ERROR',
+            'catatan'=>$th->getMessage()
+          ];
+          $update = JobMutasi::where('id',$v->id)->update($data);
+        }
       }
       public function save(Request $r){
         $data =[
