@@ -23,7 +23,7 @@
           $class       = new Cmenu();
           $opd         = (object) $class->listinstansi();
           $pegawai     = PegawaiModel::all();
-          $data        = JobMutasi::select('asal_instansi','job_mutasi.status as status','pindah_instansi','job_mutasi.created_at as created_at','job_mutasi.pegawai_id as pegawai_id','tbl_pegawai.nama as nama','tbl_pegawai.gd as gd','tbl_pegawai.gb as gb','job_mutasi.catatan as catatan')->join('tbl_pegawai','tbl_pegawai.id','job_mutasi.pegawai_id')->orderBy('job_mutasi.id','desc')->get();
+          $data        = JobMutasi::select('tbl_pegawai.nip as nip','asal_instansi','job_mutasi.status as status','pindah_instansi','job_mutasi.created_at as created_at','job_mutasi.pegawai_id as pegawai_id','tbl_pegawai.nama as nama','tbl_pegawai.gd as gd','tbl_pegawai.gb as gb','job_mutasi.catatan as catatan')->join('tbl_pegawai','tbl_pegawai.id','job_mutasi.pegawai_id')->orderBy('job_mutasi.id','desc')->get();
           return view('theme.mutasi.index',compact('pegawai','opd','data'));
       }
 

@@ -51,7 +51,7 @@
                 @endphp
                   <tr>
                     <td>{{$i+1}}</td>
-                    <td>{{$gd.' '.$v->nama.' '.$gb}}</td>
+                    <td>{{$gd.' '.$v->nama.' '.$gb}}<br>NIP / NIK : {{$v->nip}}</td>
                     <td>{{Helper::nameSkpd($v->asal_instansi)->nama_unitkerja}}</td>
                     <td>{{Helper::nameSkpd($v->pindah_instansi)->nama_unitkerja}}</td>
                     <td>{{$v->created_at}}</td>
