@@ -24,7 +24,7 @@ class LoginCo extends Controller
    print Session::get('level');
  }
  public function post(Request $r){
-  if($r->has('g-recaptcha-response') && $r->input('g-recaptcha-response') != null){
+  //if($r->has('g-recaptcha-response') && $r->input('g-recaptcha-response') != null){
    $check = Loginmodel::where('username',$r->uname)
                ->where('password',md5($r->pass))
                ->count();
@@ -41,9 +41,9 @@ class LoginCo extends Controller
    }else{
      return redirect('login')->with('danger','Akun Tidak Tersedia');
    }
-  }else{
-    return redirect('login')->with('danger','Captha harus disertakan');
-  }
+  // }else{
+  //   return redirect('login')->with('danger','Captha harus disertakan');
+  // }
  }
 
 

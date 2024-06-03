@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Session;
 use App\RouteModel;
 use App\Loginmodel;
 use App\JamModel;
+use App\TblMutasi;
 use Intervention\Image\ImageManagerStatic as Image;
 session_start();
 class Helper {
@@ -170,5 +171,14 @@ class Helper {
       }
 
 
+    }
+
+    public static function OpdActive($idPegawai){
+        try {
+          $opd = TblMutasi::where('pegawai_id',$idPegawai)->where('status','OPEN')->first();
+          return $opd->instansi_id;
+        } catch (\Throwable $th) {
+          //throw $th;
+        }
     }
 }
