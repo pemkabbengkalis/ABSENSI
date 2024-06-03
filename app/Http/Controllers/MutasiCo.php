@@ -73,7 +73,7 @@
         try {
           $data = JobMutasi::where('status','PENDING')->get();
           foreach ($data as $i => $v) {
-            $rmvPenempatan = Bidang::join('tbl_penempatan','tbl_penempatan.id_bidang','tbl_bidang.id_bidang')->where('no',$v->pegawai_id)->delete();
+            $rmvPenempatan = Penempatans::where('no',$v->pegawai_id)->delete();
             if(!$rmvPenempatan){
               $catatan = 'GAGAL MENGHAPUS PENEMPATAN';
             }
