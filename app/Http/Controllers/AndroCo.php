@@ -289,25 +289,25 @@ public function login(Request $r){
    try {
     date_default_timezone_set('Asia/Jakarta');
     $data = UserModel::where('username',$r->username)->where('password',md5($r->password))->join('tbl_pegawai','tbl_pegawai.id','tbl_user.id_pegawai')->first();
-    
-    $lokasikantor = KordinatModel::select('latitude','longitude','radius','nama_unitkerja')->where('tbl_kordinat.kode_unitkerja',$data->kode_unitkerja)
+    $kantorHelper = Helper::OpdActive($data->id_pegawai);
+    $lokasikantor = KordinatModel::select('latitude','longitude','radius','nama_unitkerja')->where('tbl_kordinat.kode_unitkerja',$kantorHelper)
     ->join('data_unitkerja','data_unitkerja.kode_unitkerja','tbl_kordinat.kode_unitkerja')->first();
     $hari =  Helper::cekhari();
     $hour = date('H');
     $dayTerm = ($hour > 17) ? "Evening" : (($hour > 12) ? "Afternoon" : "Morning");
     if($dayTerm=='Morning'){
-    $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Masuk')->first();
-    $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','M')->count();
+    $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$kantorHelper)->where('jenis','Jam Masuk')->first();
+    $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$kantorHelper)->where('tglabsen',date('Y-m-d'))->where('jenis','M')->count();
     $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
   }else if($dayTerm=='Afternoon'){
-    $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
-    $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$data->kode_unitkerja)->where('tglabsen',date('Y-m-d'))->where('jenis','P')->count();
+    $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$kantorHelper)->where('jenis','Jam Pulang')->first();
+    $checkabsen = AbsenModel::where('id_pegawai',$data->id_pegawai)->where('kode_unitkerja',$kantorHelper)->where('tglabsen',date('Y-m-d'))->where('jenis','P')->count();
     $checkabsen = ($jam == null || $checkabsen > 0) ? "no":"yes";
     }else{
-      $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$data->kode_unitkerja)->where('jenis','Jam Pulang')->first();
+      $jam = JamModel::where('hari',$hari)->where('kode_unitkerja',$kantorHelper)->where('jenis','Jam Pulang')->first();
       $checkabsen = "no";
     }
-    $absen = AbsenModel::where('id_pegawai',$data->id)->where('kode_unitkerja',$data->kode_unitkerja)->orderby('time','DESC')->get();
+    $absen = AbsenModel::where('id_pegawai',$data->id)->where('kode_unitkerja',$kantorHelper)->orderby('time','DESC')->get();
     if(!empty($data)){
       $update = [
         'token_firebase'=>$r->token

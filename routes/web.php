@@ -25,6 +25,9 @@ Route::get('mulaipesan','FrontendCo@mulai');
 Route::get('/login','LoginCo@index');
 Route::match(['get','post'],'loginpost','LoginCo@post');
 
+Route::match(['get','post'],'jobmovepegawai','MutasiCo@pindahPegawai');
+Route::match(['get','post'],'jobdomutasi','MutasiCo@jobPindahPegawai');
+
 //
 Route::get('privacy_policy','FrontendCo@privacy');
 Route::get('twakto/message','FrontendCo@twakto');
