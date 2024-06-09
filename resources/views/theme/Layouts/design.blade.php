@@ -6,6 +6,14 @@ $apps = AplikasiModel::where('id_app','1')->first();
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+script-src 'self' https://maps.googleapis.com https://kit.fontawesome.com https://maxcdn.bootstrapcdn.com https://code.jquery.com/jquery-3.4.1.min.js 'unsafe-inline';
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://maxcdn.bootstrapcdn.com;
+img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com;
+font-src 'self' https://fonts.gstatic.com https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.;
+connect-src 'self' https://maps.googleapis.com;
+">
     <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular.">
     <!-- Twitter meta-->
     <meta property="twitter:card" content="summary_large_image">
@@ -28,6 +36,7 @@ $apps = AplikasiModel::where('id_app','1')->first();
     <link rel="stylesheet" type="text/css" href="{{asset('vali/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('theme/select2/dist/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('theme/select2/dist/css/select2.min.css')}}">
+
 
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

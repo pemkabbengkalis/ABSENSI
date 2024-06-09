@@ -20,6 +20,17 @@ $datamarker = KordinatModel::where('latitude','!=','')
     <title>APLIKASI-ABSENSI KABUPATEN BENGKALIS</title>
     
     <meta name="description" content="">
+    <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' https://maps.googleapis.com https://kit.fontawesome.com 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  img-src 'self' data: https://maps.gstatic.com https://maps.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  connect-src 'self' https://maps.googleapis.com;
+">
+
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--====== Favicon Icon ======-->
