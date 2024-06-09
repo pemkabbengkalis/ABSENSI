@@ -32,45 +32,58 @@ public function index(){
 public function update(Request $r){
 
   if($r->file('file')) {
-    $r->validate([
-       'file' => 'required|mimes:png,jpg,jpeg|max:2048'
-    ]);
-        $file = $r->file('file');
-        $ext  = $file->getClientOriginalExtension();
-        $name = time().'.'.$ext;
-        $image_resize = Image::make($file->getRealPath());
-        $image_resize->resize(300, 300);
-        $image_resize->save(public_path('theme/users/'.$name));
-        if($r->logold != 'admin.png'){
-        if(file_exists(public_path('theme/users/'.$r->logold)))
-        {
-        unlink(public_path('theme/users/'.$r->logold));
-        }
-        }
-        $data=[
+      $r->validate([
+          'file' => 'required|mimes:png,jpg,jpeg|max:2048'
+      ]);
+
+      $file = $r->file('file');
+      
+      // Get the MIME type of the file
+      $mime = $file->getMimeType();
+      
+      // Check if the MIME type indicates it's an image
+      if (strpos($mime, 'image') !== false) {
+          $ext  = $file->getClientOriginalExtension();
+          $name = time().'.'.$ext;
+          $image_resize = Image::make($file->getRealPath());
+          $image_resize->resize(300, 300);
+          $image_resize->save(public_path('theme/users/'.$name));
+          
+          if($r->logold != 'admin.png'){
+              if(file_exists(public_path('theme/users/'.$r->logold))) {
+                  unlink(public_path('theme/users/'.$r->logold));
+              }
+          }
+          
+          $data=[
+              'nama'=>$r->nama,
+              'username'=>$r->username,
+              'alamat'=>$r->alamat,
+              'email'=>$r->email,
+              'nohp'=>$r->nohp,
+              'foto'=>$name
+          ];
+          
+          $act = UserModel::where($this->primary,$r->id)->update($data);
+          return back()->with('success','Data Berhasil diupdate');
+      } else {
+          // Jika file yang diunggah bukanlah gambar, berikan pesan kesalahan
+          return back()->with('error','File yang diunggah harus berupa gambar (PNG, JPG, JPEG)');
+      }
+  }
+  else{
+      $data=[
           'nama'=>$r->nama,
           'username'=>$r->username,
           'alamat'=>$r->alamat,
           'email'=>$r->email,
-          'nohp'=>$r->nohp,
-          'foto'=>$name
-        ];
-        $act = UserModel::where($this->primary,$r->id)->update($data);
-        return back()->with('success','Data Berhasil diupdate');
-   }
-   else{
-     $data=[
-       'nama'=>$r->nama,
-       'username'=>$r->username,
-       'alamat'=>$r->alamat,
-       'email'=>$r->email,
-       'nohp'=>$r->nohp
-     ];
-     $act = UserModel::where($this->primary,$r->id)->update($data);
-     return back()->with('success','Data Berhasil diupdate');
-   }
-
+          'nohp'=>$r->nohp
+      ];
+      $act = UserModel::where($this->primary,$r->id)->update($data);
+      return back()->with('success','Data Berhasil diupdate');
+  }
 }
+
 
 public function updatepass(Request $r){
   $check = UserModel::where($this->primary,$r->id)->count();
