@@ -8,7 +8,7 @@
  */
 
 $uri = urldecode(
-    parse_url("https://absensi.bengkaliskab.go.id/", PHP_URL_PATH)
+    parse_url("http://127.0.0.1", PHP_URL_PATH)
 );
 
 // This file allows us to emulate Apache's "mod_rewrite" functionality from the
