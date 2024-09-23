@@ -6,20 +6,26 @@
     </IfModule>
 
     RewriteEngine On
-	RewriteCond %{SERVER_PORT} 80
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-    RewriteCond %{REQUEST_FILENAME} -d [OR]
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ ^$1 [N]
 
-    RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
-    RewriteRule ^(.*)$ public/$1
+    # Force HTTPS, but only if it's not HTTPS already
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 
+    # Ensure requests are routed to the public directory
+    RewriteCond %{REQUEST_URI} !^/public/
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php
+    RewriteRule ^(.*)$ public/$1 [L]
 
+    # If the request is for an existing file or directory, stop further rewriting
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Fallback to index.php for anything else
+    RewriteRule ^ index.php [L]
 </IfModule>
+
 
 # BEGIN cPanel-generated php ini directives, do not edit
 # Manual editing of this file may result in unexpected behavior.
