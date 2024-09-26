@@ -299,7 +299,7 @@ use App\AbsenModel;
       },
       function () {
         swal("Aksi reset dilakukan!", "", "success")
-        window.location = '{{ url("resetabsensi") }}/' + id;
+        window.location = '{{ secure_url("resetabsensi") }}/' + id;
 
       }
 
@@ -320,7 +320,7 @@ use App\AbsenModel;
           processing: true,
           retrieve: true,
           serverSide: true,
-          ajax: "{{ url('apiabsen') }}?skpd="+skpd+"&tanggalabsen="+tgl+"&jenisabsen="+jenis,
+          ajax: "{{ secure_url('apiabsen') }}?skpd="+skpd+"&tanggalabsen="+tgl+"&jenisabsen="+jenis,
           columns: [{ // mengambil & menampilkan kolom sesuai tabel database
                         data: 'no',
                         name: 'no'
