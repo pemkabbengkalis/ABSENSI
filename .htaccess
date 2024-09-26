@@ -1,29 +1,19 @@
-
-
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
+RewriteEngine On
 
-    RewriteEngine On
-
-    # Force HTTPS, but only if it's not HTTPS already
-    RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
-    # Ensure requests are routed to the public directory
-    RewriteCond %{REQUEST_URI} !^/public/
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^(.*)$ public/$1 [L]
-
-    # If the request is for an existing file or directory, stop further rewriting
+#RewriteCond %{HTTPS}  !=on
+#RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
     RewriteCond %{REQUEST_FILENAME} -d [OR]
     RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^ - [L]
+    RewriteRule ^ ^$1 [N]
 
-    # Fallback to index.php for anything else
-    RewriteRule ^ index.php [L]
+    RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
+    RewriteRule ^(.*)$ public/$1
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ server.php
+
 </IfModule>
 
 
