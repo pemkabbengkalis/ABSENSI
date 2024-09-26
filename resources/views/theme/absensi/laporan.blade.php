@@ -371,7 +371,7 @@ use App\AbsenModel;
           destroy: true,
           processing: true,
           serverSide: true,
-          ajax: "{{url('getdataabsenfromjenis')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
+          ajax: "{{url('getdataabsenfromjenis').replace('http', 'https')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
           columns: [{ // mengambil & menampilkan kolom sesuai tabel database
                         data: 'no',
                         name: 'no'
@@ -423,7 +423,7 @@ use App\AbsenModel;
           destroy: true,
           processing: true,
           serverSide: true,
-          ajax: "{{url('getdataabsenfromjenis')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
+          ajax: "{{url('getdataabsenfromjenis').replace('http', 'https')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
           columns: [{ // mengambil & menampilkan kolom sesuai tabel database
                         data: 'no',
                         name: 'no'
@@ -476,7 +476,7 @@ use App\AbsenModel;
           destroy: true,
           processing: true,
           serverSide: true,
-          ajax: "{{url('getdataabsenfromjenis')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
+          ajax: "{{url('getdataabsenfromjenis').replace('http', 'https')}}?skpd="+skpd+"&jenisabsen="+jenis+"&tanggalabsen="+tgl,
           columns: [{ // mengambil & menampilkan kolom sesuai tabel database
                         data: 'no',
                         name: 'no'
