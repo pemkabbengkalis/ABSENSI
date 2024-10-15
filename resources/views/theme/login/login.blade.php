@@ -24,7 +24,7 @@ $apps = AplikasiModel::where('id_app','1')->first();
       <div class="logo">
       </div>
       <div class="login-box">
-        <form class="login-form" action="{{url('loginpost')}}"> {{csrf_field()}}
+        <form class="login-form" action="{{url('loginpost')}}" method="post"> {{csrf_field()}}
         <center>
           <img src="{{url('logobks.png')}}" alt="Girl in a jacket" width="70" height="90" >
             @include('theme.Layouts.alert')
